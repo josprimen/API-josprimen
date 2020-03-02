@@ -1,0 +1,113 @@
+    1  cd /workspace/sandbox; clear
+    2  export LANG=en_US.UTF-8;export LANGUAGE=en_US.UTF-8;locale-gen;source ~/.profile; [ ! -f ~/.custom_env ] || source ~/.custom_env; clear;
+    3  cd /workspace/sandbox; clear
+    4  export LANG=en_US.UTF-8;export LANGUAGE=en_US.UTF-8;locale-gen;source ~/.profile; [ ! -f ~/.custom_env ] || source ~/.custom_env; clear;
+    5  cd /workspace/sandbox; clear
+    6  export LANG=en_US.UTF-8;export LANGUAGE=en_US.UTF-8;locale-gen;source ~/.profile; [ ! -f ~/.custom_env ] || source ~/.custom_env; clear;
+    7  cd /workspace/sandbox; clear
+    8  export LANG=en_US.UTF-8;export LANGUAGE=en_US.UTF-8;locale-gen;source ~/.profile; [ ! -f ~/.custom_env ] || source ~/.custom_env; clear;
+    9  cd /workspace/sandbox; clear
+   10  export LANG=en_US.UTF-8;export LANGUAGE=en_US.UTF-8;locale-gen;source ~/.profile; [ ! -f ~/.custom_env ] || source ~/.custom_env; clear;
+   11  cd /workspace/sandbox; clear
+   12  ls
+   13  cd APIjosprimen/
+   14  ls
+   15  cd primervideo/
+   16  node types.js 
+   17  ls
+   18  node tutorial_variables.js 
+   19  node
+   20  node tutorial_variables.js 
+   21  touch funciones.js
+   22  goorm funciones.js 
+   23  ls
+   24  cd ..
+   25  ls
+   26  cd workspace/
+   27  ls
+   28  cd sandbox/
+   29  ls
+   30  cd APIjosprimen/
+   31  ls
+   32  cd primervideo/
+   33  ls
+   34  node funciones.js 
+   35  cd /workspace/sandbox; clear
+   36  export LANG=en_US.UTF-8;export LANGUAGE=en_US.UTF-8;locale-gen;source ~/.profile; [ ! -f ~/.custom_env ] || source ~/.custom_env; clear;
+   37  cd /workspace/sandbox; clear
+   38  export LANG=en_US.UTF-8;export LANGUAGE=en_US.UTF-8;locale-gen;source ~/.profile; [ ! -f ~/.custom_env ] || source ~/.custom_env; clear;
+   39  cd /workspace/sandbox; clear
+   40  export LANG=en_US.UTF-8;export LANGUAGE=en_US.UTF-8;locale-gen;source ~/.profile; [ ! -f ~/.custom_env ] || source ~/.custom_env; clear;
+   41  cd /workspace/sandbox; clear
+   42  ls
+   43  cd APIjosprimen/
+   44  ls
+   45  cd primervideo/
+   46  ls
+   47  cd funciones.js 
+   48  ls
+   49  node funciones.js 
+   50  node
+   51  node funciones.js 
+   52  node
+   53  node funciones.js 
+   54  node
+   55  node funciones.js 
+   56  git
+   57  git add *
+   58  git commit -m "added variables and function tutorials"
+   59  git config --global josprimen@alum.us.es
+   60  git config --global "josprimen@alum.us.es"
+   61  git session
+   62  fit log
+   63  git log
+   64  git commit -m "added variables and function tutorials"
+   65  git config --global user.name "josprimen"
+   66  git commit -m "added variables and function tutorials"
+   67  git config --global user.email "josprimen@alum.us.es"
+   68  git commit -m "added variables and function tutorials"
+   69  git push
+   70  ls
+   71  exit
+   72  cd /workspace/sandbox; clear
+   73  export LANG=en_US.UTF-8;export LANGUAGE=en_US.UTF-8;locale-gen;source ~/.profile; [ ! -f ~/.custom_env ] || source ~/.custom_env; clear;
+   74  cd /workspace/sandbox; clear
+   75  export LANG=en_US.UTF-8;export LANGUAGE=en_US.UTF-8;locale-gen;source ~/.profile; [ ! -f ~/.custom_env ] || source ~/.custom_env; clear;
+   76  cd /workspace/sandbox; clear
+   77  ls
+   78  cd APIjosprimen/
+   79  ls
+   80  mkdir segundovideo
+   81  ls
+   82  cd segundovideo/
+   83  npm
+   84  npm init
+   85  ls
+   86  goorm package.json 
+   87  cd ..
+   88  ls
+   89  cd primervideo/
+   90  ls
+   91  node funciones.js 
+   92  node
+   93  node funciones.js 
+   94  cd ..
+   95  ls
+   96  cd segundovideo/
+   97  ls
+   98  touch index.js
+   99  js
+  100  ls
+  101  goorm index.js 
+  102  node index.js 
+  103  npm start
+  104  history
+  105  npm install cool-ascii-faces --save
+  106  npm start
+  107  touch .gitignore
+  108  goorm .gitignore 
+  109  git status
+  110  git add *
+  111  git commit -m "nmp added"
+  112  git push
+  113  history > commands.txt
