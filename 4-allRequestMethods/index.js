@@ -34,7 +34,7 @@ var contacts = [
 app.get(BASE_URL + '/contacts', (req, res) => {
     console.log(Date() + ' - GET /contacts');
     res.send(contacts);
-    //res.sendStatus(200); is not necessary, if it return data, it is already sending a 200ok
+    //res.sendStatus(200); is not necessary, if it returns data, it is already sending a 200ok
 });
 
 app.post(BASE_URL + '/contacts', (req, res) => {
