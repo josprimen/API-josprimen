@@ -2,10 +2,9 @@ var contactsAPI = {};
 
 module.exports = contactsAPI;
 
-contactsAPI.methods = function(app, BASE_URL, db){
-	
+contactsAPI.methods = function(app, BASE_URL, db) {
     console.log(Date() + ' - Module contactsAPI imported');
-	
+
     //Resources
 
     /*app.get(BASE_URL + '/contacts', (req, res) => {
@@ -16,12 +15,17 @@ contactsAPI.methods = function(app, BASE_URL, db){
 
     app.get(BASE_URL + '/contacts', (req, res) => {
         console.log(Date() + ' - GET /contacts');
-        db.find({}, (err, contacts) => {
+        db.find({}).toArray((err, contacts) => {
             if (err) {
                 console.error('Error accesing DataBase');
                 res.sendStatus(500);
             }
-            res.send(contacts);
+            res.send(
+                contacts.map(x => {
+                    delete x._id;
+                    return x;
+                })
+            );
         });
     });
 
@@ -72,12 +76,17 @@ contactsAPI.methods = function(app, BASE_URL, db){
     app.get(BASE_URL + '/contacts/:name', (req, res) => {
         var aux = req.params.name;
         console.log(Date() + ' - GET /contacts/' + aux);
-        db.find({ name: aux }, (err, contacts) => {
+        db.find({ name: aux }).toArray((err, contacts) => {
             if (err) {
                 console.error('Error accesing DataBase');
                 res.sendStatus(500);
             }
-            res.send(contacts);
+            res.send(
+                contacts.map(x => {
+                    delete x._id;
+                    return x;
+                })
+            );
         });
     });
 
