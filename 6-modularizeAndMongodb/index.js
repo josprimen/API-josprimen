@@ -57,7 +57,7 @@ mongodb.connect(mongoURL,{native_parser:true, useUnifiedTopology: true},(err, ml
         console.log('%s:%s', 'Server not ready, an error ocurred: ' + e);
     });
 	
-	contactsAPI.methods(app, BASE_URL, db);
+	contactsAPI.methods(app, BASE_URL, db, InitialContacts);
 	
 });
 

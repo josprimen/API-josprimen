@@ -2,7 +2,7 @@ var contactsAPI = {};
 
 module.exports = contactsAPI;
 
-contactsAPI.methods = function(app, BASE_URL, db) {
+contactsAPI.methods = function(app, BASE_URL, db, InitialContacts) {
     console.log(Date() + ' - Module contactsAPI imported');
 
     //Resources
@@ -61,6 +61,16 @@ contactsAPI.methods = function(app, BASE_URL, db) {
         }); //square brackets are in case some condition is placed when removing data in the database
         res.sendStatus(200);
     });
+	
+	app.post(BASE_URL + "/contacts/loadInitialData", (req, res) => {
+		console.log(Date() + " - POST /contacts/loadInitialData");
+		db.insertMany(InitialContacts);
+		res.sendStatus(201);
+	});
+	
+	app.get(BASE_URL + "/contacts/help", (req, res) => {
+		res.redirect("https://documenter.getpostman.com/view/3950150/SzS2xU2i?version=latest");
+	});
 
     //Specific resources
     /*app.get(BASE_URL + '/contacts/:name', (req, res) => {
