@@ -39,7 +39,7 @@ contactsAPI.methods = function(app, BASE_URL, db) {
     app.post(BASE_URL + '/contacts', (req, res) => {
         console.log(Date() + ' - POST /contacts');
         var contact = req.body;
-        db.insert(contact);
+        db.insertOne(contact);
         res.sendStatus(201);
     });
 
@@ -56,8 +56,8 @@ contactsAPI.methods = function(app, BASE_URL, db) {
 
     app.delete(BASE_URL + '/contacts', (req, res) => {
         console.log(Date() + ' - DELETE /contacts');
-        db.remove({}, { multi: true }, (err, numDelete) => {
-            console.log(Date() + numDelete + ' contacts deleted.');
+        db.deleteMany({}, { multi: true }, (err, numDelete) => {
+            console.log(Date() + ' - Several contacts deleted.');
         }); //square brackets are in case some condition is placed when removing data in the database
         res.sendStatus(200);
     });
@@ -93,8 +93,8 @@ contactsAPI.methods = function(app, BASE_URL, db) {
     app.delete(BASE_URL + '/contacts/:name', (req, res) => {
         var aux = req.params.name;
         console.log(Date() + ' - DELETE /contacts/' + aux);
-        db.remove({ name: aux }, {}, (err, numDelete) => {
-            console.log(Date() + numDelete + ' contacts deleted.');
+        db.deleteOne({ name: aux }, {}, (err) => {
+            console.log(Date() + ' - One contact deleted.');
         }); //square brackets are in case some condition is placed when removing data in the database
         res.sendStatus(200);
     });
@@ -131,8 +131,8 @@ contactsAPI.methods = function(app, BASE_URL, db) {
             res.sendStatus(409);
             console.warn(Date() + ' - Hacking attempt!');
         } else {
-            db.update({ name: aux }, aux2, (err, numUpdate) => {
-                console.log(Date() + numUpdate + ' contacts updated.');
+            db.updateOne({ name: aux }, aux2, (err) => {
+                console.log(Date() + ' - One contact updated.');
             });
             res.sendStatus(200);
         }

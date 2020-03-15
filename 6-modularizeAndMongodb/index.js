@@ -43,7 +43,7 @@ mongodb.connect(mongoURL,{native_parser:true, useUnifiedTopology: true},(err, ml
 	db.find({}).toArray((err, contacts) => {
     if (contacts.length == 0) {
         console.log('Empty DataBase - Inserting default data');
-        db.insert(InitialContacts);
+        db.insertMany(InitialContacts);
     } else {
         console.log(Date() + ' - Data loaded');
     }
