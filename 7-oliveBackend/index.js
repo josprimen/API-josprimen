@@ -23,16 +23,6 @@ console.log(__dirname);
 //Data code
 var InitialDeliveryNotes = [
     {
-        DIA: 'DIA',
-        MES: 'MES',
-        ANYO: 'ANYO',
-        KGSACEITUNA: 'KGSACEITUNA',
-        RDTO: 'RDTO',
-        HUMEDAD: 'HUMEDAD',
-        ACIDEZ: 'ACIDEZ',
-        TICKET: 'TICKET'
-    },
-    {
         DIA: '21',
         MES: '10',
         ANYO: '2015',
