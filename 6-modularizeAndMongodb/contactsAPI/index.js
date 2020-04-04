@@ -65,7 +65,7 @@ contactsAPI.methods = function(app, BASE_URL, db, InitialContacts) {
 	app.get(BASE_URL + "/contacts/loadInitialData", (req, res) => {
 		console.log(Date() + " - GET /contacts/loadInitialData");
 		db.insertMany(InitialContacts);
-		db.find({ name: aux }).toArray((err, contacts) => {
+		db.find({}).toArray((err, contacts) => {
             if (err) {
                 console.error('Error accesing DataBase');
                 res.sendStatus(500);
