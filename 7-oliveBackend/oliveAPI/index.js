@@ -50,10 +50,10 @@ oliveAPI.methods = function(app, BASE_URL, db, InitialDeliveryNotes) {
         });
     });
 
-    app.get(BASE_URL + '/olive/:ticket', (req, res) => {
-        ticket = req.params.ticket;
-        console.log(Date() + ' - GET /olive/' + ticket);
-        db.find({ TICKET: ticket }).toArray((err, olive) => {
+app.get(BASE_URL + '/olive/:year', (req, res) => {
+        year = req.params.year;
+        console.log(Date() + ' - GET /olive/' + year);
+        db.find({ ANYO: year }).toArray((err, olive) => {
             if (err) {
                 console.error('Error accesing DataBase');
                 res.sendStatus(500);
@@ -65,9 +65,28 @@ oliveAPI.methods = function(app, BASE_URL, db, InitialDeliveryNotes) {
                 })
             );
         });
-    });
+    });	
 
-    app.get(BASE_URL + '/olive/:day/:month/:year', (req, res) => {
+app.get(BASE_URL + '/olive/:year/:month', (req, res) => {
+        month = req.params.month;
+        year = req.params.year;
+        date = '/' + year + '/' + month;
+        console.log(Date() + ' - GET /olive/' + date);
+        db.find({ MES: month, ANYO: year }).toArray((err, olive) => {
+            if (err) {
+                console.error('Error accesing DataBase');
+                res.sendStatus(500);
+            }
+            res.send(
+                olive.map(x => {
+                    delete x._id;
+                    return x;
+                })
+            );
+        });
+    });	
+
+app.get(BASE_URL + '/olive/:year/:month/:day', (req, res) => {
         day = req.params.day;
         month = req.params.month;
         year = req.params.year;
@@ -85,7 +104,30 @@ oliveAPI.methods = function(app, BASE_URL, db, InitialDeliveryNotes) {
                 })
             );
         });
+    });	
+
+    app.get(BASE_URL + '/olive/:year/:month/:day/:ticket', (req, res) => {
+        ticket = req.params.ticket;
+		day = req.params.day;
+        month = req.params.month;
+        year = req.params.year;
+        date = '' + day + '/' + month + '/' + year;
+        console.log(Date() + ' - GET /olive/' + date + ticket);
+        db.find({ DIA: day, MES: month, ANYO: year, TICKET: ticket }).toArray((err, olive) => {
+            if (err) {
+                console.error('Error accesing DataBase');
+                res.sendStatus(500);
+            }
+            res.send(
+                olive.map(x => {
+                    delete x._id;
+                    return x;
+                })
+            );
+        });
     });
+
+  
     /*#PP------------------------------ALLOWED POST AND PUT---------------------------*/
 
     app.post(BASE_URL + '/olive', (req, res) => {
@@ -95,7 +137,7 @@ oliveAPI.methods = function(app, BASE_URL, db, InitialDeliveryNotes) {
         res.sendStatus(201);
     });
 	
-	app.put(BASE_URL + '/olive/:ticket', (req, res) => {
+	app.put(BASE_URL + '/olive/:year/:month/:day/:ticket', (req, res) => {
         var deliverybody = req.body;
         var ticket = req.params.ticket;
         console.log(Date() + ' - PUT /contacts/' + ticket);
@@ -121,10 +163,42 @@ oliveAPI.methods = function(app, BASE_URL, db, InitialDeliveryNotes) {
         res.sendStatus(200);
     });
 	
-	app.delete(BASE_URL + '/olive/:ticket', (req, res) => {
+	app.delete(BASE_URL + '/olive/:year', (req, res) => {
+		year = req.params.year;
+        console.log(Date() + ' - DELETE /olive/' + year);
+        db.deleteMany({ANYO:year}, {}, (err, numDelete) => {
+            console.log(Date() + ' - Several olive delivery notes deleted.');
+        }); //square brackets are in case some condition is placed when removing data in the database
+        res.sendStatus(200);
+    });
+	
+	app.delete(BASE_URL + '/olive/:year/:month', (req, res) => {
+		year = req.params.year;
+		month = req.params.month;
+		date = '/' + year + '/' + month;
+        console.log(Date() + ' - DELETE /olive/' + date);
+        db.deleteMany({ANYO:year, MES: month}, {}, (err, numDelete) => {
+            console.log(Date() + ' - Several olive delivery notes deleted.');
+        }); //square brackets are in case some condition is placed when removing data in the database
+        res.sendStatus(200);
+    });
+	
+	app.delete(BASE_URL + '/olive/:year/:month/:day', (req, res) => {
+		year = req.params.year;
+		month = req.params.month;
+		day = req.params.day;
+		date = '/' + year + '/' + month + '/' + day;
+        console.log(Date() + ' - DELETE /olive/' + date);
+        db.deleteMany({ANYO:year, MES: month, DIA: day}, {}, (err, numDelete) => {
+            console.log(Date() + ' - Several olive delivery notes deleted.');
+        }); //square brackets are in case some condition is placed when removing data in the database
+        res.sendStatus(200);
+    });
+	
+	app.delete(BASE_URL + '/olive/:year/:month/:day/:ticket', (req, res) => {
 		ticket = req.params.ticket;
         console.log(Date() + ' - DELETE /olive/' + ticket);
-        db.deleteOne({TICKET:ticket}, {}, (err, numDelete) => {
+        db.deleteOne({ANYO:year, MES: month, DIA: day, TICKET:ticket}, {}, (err, numDelete) => {
             console.log(Date() + ' - Olive delivery note deleted.');
         }); //square brackets are in case some condition is placed when removing data in the database
         res.sendStatus(200);
@@ -141,7 +215,7 @@ oliveAPI.methods = function(app, BASE_URL, db, InitialDeliveryNotes) {
 
     /*#PO------------------------------NOT ALLOWED POSTS---------------------------*/
 	
-	app.post(BASE_URL + '/contacts/:ticket', (req, res) => {
+	app.post(BASE_URL + '/contacts/:year/:month/:day/:ticket', (req, res) => {
         var ticket = req.params.ticket;
         console.log(Date() + ' - POST /contacts/' + ticket);
         res.sendStatus(405);
