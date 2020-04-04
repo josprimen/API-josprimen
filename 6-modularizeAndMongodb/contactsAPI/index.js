@@ -63,9 +63,20 @@ contactsAPI.methods = function(app, BASE_URL, db, InitialContacts) {
     });
 	
 	app.get(BASE_URL + "/contacts/loadInitialData", (req, res) => {
-		console.log(Date() + " - POST /contacts/loadInitialData");
+		console.log(Date() + " - GET /contacts/loadInitialData");
 		db.insertMany(InitialContacts);
-		res.sendStatus(201);
+		db.find({}).toArray((err, contacts) => {
+            if (err) {
+                console.error('Error accesing DataBase');
+                res.sendStatus(500);
+            }
+            res.send(
+                contacts.map(x => {
+                    delete x._id;
+                    return x;
+                })
+            );
+        });
 	});
 	
 	app.get(BASE_URL + "/contacts/help", (req, res) => {
