@@ -62,7 +62,7 @@ contactsAPI.methods = function(app, BASE_URL, db, InitialContacts) {
         res.sendStatus(200);
     });
 	
-	app.post(BASE_URL + "/contacts/loadInitialData", (req, res) => {
+	app.get(BASE_URL + "/contacts/loadInitialData", (req, res) => {
 		console.log(Date() + " - POST /contacts/loadInitialData");
 		db.insertMany(InitialContacts);
 		res.sendStatus(201);
