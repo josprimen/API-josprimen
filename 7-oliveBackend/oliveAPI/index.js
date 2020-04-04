@@ -20,10 +20,21 @@ oliveAPI.methods = function(app, BASE_URL, db, InitialDeliveryNotes) {
 
     /*#I2------------------------------INITIALIZER---------------------------*/
 
-    app.post(BASE_URL + '/olive/loadInitialData', (req, res) => {
-        console.log(Date() + ' - POST /olive/loadInitialData');
+    app.get(BASE_URL + '/olive/loadInitialData', (req, res) => {
+        console.log(Date() + ' - GET /olive/loadInitialData');
         db.insertMany(InitialDeliveryNotes);
-        res.sendStatus(201);
+        db.find({}).toArray((err, olive) => {
+            if (err) {
+                console.error('Error accesing DataBase');
+                res.sendStatus(500);
+            }
+            res.send(
+                olive.map(x => {
+                    delete x._id;
+                    return x;
+                })
+            );
+        });
     });
 
     /*#MA------------------------------ALLOWED METHODS---------------------------*/
