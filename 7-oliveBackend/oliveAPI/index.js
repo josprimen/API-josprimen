@@ -226,13 +226,13 @@ app.get(BASE_URL + '/olive/:year/:month/:day', (req, res) => {
 
     /*#PO------------------------------NOT ALLOWED POSTS---------------------------*/
 	
-	app.post(BASE_URL + '/contacts/:year/:month/:day/:ticket', (req, res) => {
+	app.post(BASE_URL + '/olive/:year/:month/:day/:ticket', (req, res) => {
         var ticket = req.params.ticket;
         console.log(Date() + ' - POST /contacts/' + ticket);
         res.sendStatus(405);
     });
 	
-	app.post(BASE_URL + '/contacts/:day/:month/:year', (req, res) => {
+	app.post(BASE_URL + '/olive/:year/:month/:day', (req, res) => {
          day = req.params.day;
         month = req.params.month;
         year = req.params.year;
@@ -241,7 +241,21 @@ app.get(BASE_URL + '/olive/:year/:month/:day', (req, res) => {
         res.sendStatus(405);
     });
 	
-	app.post(BASE_URL + '/contacts/:ticket', (req, res) => {
+	app.post(BASE_URL + '/olive/:year/:month', (req, res) => {
+        month = req.params.month;
+        year = req.params.year;
+        date = '' + month + '/' + year;
+        console.log(Date() + ' - POST /contacts/' + date);
+        res.sendStatus(405);
+    });
+	
+	app.post(BASE_URL + '/olive/:year', (req, res) => {
+        year = req.params.year;
+        console.log(Date() + ' - POST /contacts/' + year);
+        res.sendStatus(405);
+    });
+	
+	app.post(BASE_URL + '/olive/:ticket', (req, res) => {
         ticket = req.params.ticket;
         console.log(Date() + ' - POST /contacts/' + ticket);
         res.sendStatus(405);
