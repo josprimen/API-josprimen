@@ -2,7 +2,7 @@ var oliveAPI = {};
 
 module.exports = oliveAPI;
 
-oliveAPI.methods = function(app, BASE_URL, db, InitialDeliveryNotes) {
+oliveAPI.methods = function(app, BASE_URL, db, InitialDeliveryNotes, alldata) {
     console.log(Date() + ' - Module oliveAPI imported');
 
     /* INDEX FOR SEARCHING. PRESS CTRL + F AND WRITE THE DIMINUTIVE FROM THE LEFT*/
@@ -36,13 +36,30 @@ oliveAPI.methods = function(app, BASE_URL, db, InitialDeliveryNotes) {
             );
         });
     });
+	
+	app.get(BASE_URL + '/olive/loadAllData', (req, res) => {
+        console.log(Date() + ' - GET /olive/loadAllData');
+        db.insertMany(alldata);
+        db.find({}).toArray((err, olive) => {
+            if (err) {
+                console.error('Error accesing DataBase');
+                res.sendStatus(500);
+            }
+            res.send(
+                olive.map(x => {
+                    delete x._id;
+                    return x;
+                })
+            );
+        });
+    });
 
     /*#MA------------------------------ALLOWED METHODS---------------------------*/
 
     /*#GE------------------------------GETTERS---------------------------*/
 
-    app.get(BASE_URL + '/olive/help', (req, res) => {
-        res.redirect('');
+    app.get(BASE_URL + '/olive/test', (req, res) => {
+        res.redirect('https://documenter.getpostman.com/view/3950150/SzYdRw3B?version=latest');
     });
 
     app.get(BASE_URL + '/olive', (req, res) => {

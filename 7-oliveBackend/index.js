@@ -3,11 +3,13 @@ var express = require('express');
 var bodyparser = require('body-parser');
 var mongodb = require("mongodb").MongoClient; //It returns the access client to Mongo
 var oliveAPI = require('./oliveAPI');//Importing module oliveAPI
+var datamodule = require('./pythonScriptAndData');
 
 //Variables
 var port = process.env.PORT || 3000;
 var BASE_URL = '/josprimenapi/v1';
 var mongoURL = "mongodb://josprimen:josprimenpass1@ds133981.mlab.com:33981/josprimen-api";
+var alldata = datamodule.data;
 
 var app = express();
 
@@ -282,6 +284,6 @@ mongodb.connect(mongoURL,{native_parser:true, useUnifiedTopology: true},(err, ml
         console.log('%s:%s', 'Server not ready, an error ocurred: ' + e);
     });
 	
-	oliveAPI.methods(app, BASE_URL, db, InitialDeliveryNotes);
+	oliveAPI.methods(app, BASE_URL, db, InitialDeliveryNotes, alldata);
 	
 });
