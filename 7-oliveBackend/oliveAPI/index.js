@@ -140,7 +140,7 @@ app.get(BASE_URL + '/olive/:year/:month/:day', (req, res) => {
         month = req.params.month;
         year = req.params.year;
         date = '' + day + '/' + month + '/' + year;
-        console.log(Date() + ' - GET /olive/' + date + ticket);
+        console.log(Date() + ' - GET /olive/' + date + '/' +ticket);
         db.find({ DIA: day, MES: month, ANYO: year, TICKET: ticket }).toArray((err, olive) => {
             if (err) {
                 console.error('Error accesing DataBase');

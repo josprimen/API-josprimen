@@ -75703,4 +75703,6 @@ object.data = [
     }
 ];
 
+object.initialdata = object.data.slice(0,23);
+
 module.exports = object;
