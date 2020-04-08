@@ -64,7 +64,9 @@ oliveAPI.methods = function(app, BASE_URL, db, InitialDeliveryNotes, alldata) {
 
     app.get(BASE_URL + '/olive', (req, res) => {
         console.log(Date() + ' - GET /olive');
-        db.find({}).toArray((err, olive) => {
+		var limit = parseInt(req.query.limit);
+		var offset = parseInt(req.query.offset);
+        db.find({}).skip(offset).limit(limit).toArray((err, olive) => {
             if (err) {
                 console.error('Error accesing DataBase');
                 res.sendStatus(500);
