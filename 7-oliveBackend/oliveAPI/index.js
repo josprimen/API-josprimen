@@ -81,7 +81,7 @@ oliveAPI.methods = function(app, BASE_URL, db, InitialDeliveryNotes, alldata) {
     });
 
 app.get(BASE_URL + '/olive/:year', (req, res) => {
-        year = req.params.year;
+        var year = req.params.year;
         console.log(Date() + ' - GET /olive/' + year);
         db.find({ ANYO: year }).toArray((err, olive) => {
             if (err) {
@@ -98,9 +98,9 @@ app.get(BASE_URL + '/olive/:year', (req, res) => {
     });	
 
 app.get(BASE_URL + '/olive/:year/:month', (req, res) => {
-        month = req.params.month;
-        year = req.params.year;
-        date = '/' + year + '/' + month;
+        var month = req.params.month;
+        var year = req.params.year;
+        var date = '/' + year + '/' + month;
         console.log(Date() + ' - GET /olive/' + date);
         db.find({ MES: month, ANYO: year }).toArray((err, olive) => {
             if (err) {
@@ -117,10 +117,10 @@ app.get(BASE_URL + '/olive/:year/:month', (req, res) => {
     });	
 
 app.get(BASE_URL + '/olive/:year/:month/:day', (req, res) => {
-        day = req.params.day;
-        month = req.params.month;
-        year = req.params.year;
-        date = '' + day + '/' + month + '/' + year;
+        var day = req.params.day;
+        var month = req.params.month;
+        var year = req.params.year;
+        var date = '' + day + '/' + month + '/' + year;
         console.log(Date() + ' - GET /olive/' + date);
         db.find({ DIA: day, MES: month, ANYO: year }).toArray((err, olive) => {
             if (err) {
@@ -137,11 +137,11 @@ app.get(BASE_URL + '/olive/:year/:month/:day', (req, res) => {
     });	
 
     app.get(BASE_URL + '/olive/:year/:month/:day/:ticket', (req, res) => {
-        ticket = req.params.ticket;
-		day = req.params.day;
-        month = req.params.month;
-        year = req.params.year;
-        date = '' + day + '/' + month + '/' + year;
+        var ticket = req.params.ticket;
+		var day = req.params.day;
+        var month = req.params.month;
+        var year = req.params.year;
+        var date = '' + day + '/' + month + '/' + year;
         console.log(Date() + ' - GET /olive/' + date + '/' +ticket);
         db.find({ DIA: day, MES: month, ANYO: year, TICKET: ticket }).toArray((err, olive) => {
             if (err) {
@@ -194,7 +194,7 @@ app.get(BASE_URL + '/olive/:year/:month/:day', (req, res) => {
     });
 	
 	app.delete(BASE_URL + '/olive/:year', (req, res) => {
-		year = req.params.year;
+		var year = req.params.year;
         console.log(Date() + ' - DELETE /olive/' + year);
         db.deleteMany({ANYO:year}, {}, (err, numDelete) => {
             console.log(Date() + ' - Several olive delivery notes deleted.');
@@ -203,9 +203,9 @@ app.get(BASE_URL + '/olive/:year/:month/:day', (req, res) => {
     });
 	
 	app.delete(BASE_URL + '/olive/:year/:month', (req, res) => {
-		year = req.params.year;
-		month = req.params.month;
-		date = '/' + year + '/' + month;
+		var year = req.params.year;
+		var month = req.params.month;
+		var date = '/' + year + '/' + month;
         console.log(Date() + ' - DELETE /olive/' + date);
         db.deleteMany({ANYO:year, MES: month}, {}, (err, numDelete) => {
             console.log(Date() + ' - Several olive delivery notes deleted.');
@@ -214,10 +214,10 @@ app.get(BASE_URL + '/olive/:year/:month/:day', (req, res) => {
     });
 	
 	app.delete(BASE_URL + '/olive/:year/:month/:day', (req, res) => {
-		year = req.params.year;
-		month = req.params.month;
-		day = req.params.day;
-		date = '/' + year + '/' + month + '/' + day;
+		var year = req.params.year;
+		var month = req.params.month;
+		var day = req.params.day;
+		var date = '/' + year + '/' + month + '/' + day;
         console.log(Date() + ' - DELETE /olive/' + date);
         db.deleteMany({ANYO:year, MES: month, DIA: day}, {}, (err, numDelete) => {
             console.log(Date() + ' - Several olive delivery notes deleted.');
@@ -226,7 +226,10 @@ app.get(BASE_URL + '/olive/:year/:month/:day', (req, res) => {
     });
 	
 	app.delete(BASE_URL + '/olive/:year/:month/:day/:ticket', (req, res) => {
-		ticket = req.params.ticket;
+		var year = req.params.year;
+		var month = req.params.month;
+		var day = req.params.day;
+		var ticket = req.params.ticket;
         console.log(Date() + ' - DELETE /olive/' + ticket);
         db.deleteOne({ANYO:year, MES: month, DIA: day, TICKET:ticket}, {}, (err, numDelete) => {
             console.log(Date() + ' - Olive delivery note deleted.');
@@ -252,30 +255,30 @@ app.get(BASE_URL + '/olive/:year/:month/:day', (req, res) => {
     });
 	
 	app.post(BASE_URL + '/olive/:year/:month/:day', (req, res) => {
-         day = req.params.day;
-        month = req.params.month;
-        year = req.params.year;
-        date = '' + day + '/' + month + '/' + year;
+        var day = req.params.day;
+        var month = req.params.month;
+        var year = req.params.year;
+        var date = '' + day + '/' + month + '/' + year;
         console.log(Date() + ' - POST /contacts/' + date);
         res.sendStatus(405);
     });
 	
 	app.post(BASE_URL + '/olive/:year/:month', (req, res) => {
-        month = req.params.month;
-        year = req.params.year;
-        date = '' + month + '/' + year;
+        var month = req.params.month;
+        var year = req.params.year;
+        var date = '' + month + '/' + year;
         console.log(Date() + ' - POST /contacts/' + date);
         res.sendStatus(405);
     });
 	
 	app.post(BASE_URL + '/olive/:year', (req, res) => {
-        year = req.params.year;
+        var year = req.params.year;
         console.log(Date() + ' - POST /contacts/' + year);
         res.sendStatus(405);
     });
 	
 	app.post(BASE_URL + '/olive/:ticket', (req, res) => {
-        ticket = req.params.ticket;
+        var ticket = req.params.ticket;
         console.log(Date() + ' - POST /contacts/' + ticket);
         res.sendStatus(405);
     });
