@@ -67,19 +67,18 @@ oliveAPI.methods = function(app, BASE_URL, db, InitialDeliveryNotes, alldata) {
         var offset = parseInt(req.query.offset);
         var afrom = Number(req.query.from);
         var ato = Number(req.query.to);
-        var rdto = parseInt(req.query.RDTO);
-        var humidity = Number(req.query.HUMEDAD);
-        var acidity = Number(req.query.ACIDEZ);
+        var rdto = '' + req.query.RDTO;
+        var humidity = '' + req.query.HUMEDAD;
+        var acidity = '' + req.query.ACIDEZ;
         var kgs = Number(req.query.KGSACEITUNA);
         var day = Number(req.query.DIA);
-        var month = Number(req.query.MES);
+        var month = '' + req.query.MES;
         var year = Number(req.query.ANYO);
-		search = false;
-		console.log(search);
-		console.log(rdto);
-        if (afrom && ato && rdto) { //URL form www.server/resource?searchparam&from=value&to=value with this format search param will be set to 0 and will get in the if
-			search = true;
-			console.log(Date() + ' - GET /olive search by rdto');
+        search = false;
+        if (afrom && ato && rdto == 'true') {
+            //URL form www.server/resource?searchparam=true&from=value&to=value
+            search = true;
+            console.log(Date() + ' - GET /olive search by rdto');
             db
                 .find({ RDTO: { $gte: afrom, $lte: ato } })
                 .skip(offset)
@@ -98,9 +97,9 @@ oliveAPI.methods = function(app, BASE_URL, db, InitialDeliveryNotes, alldata) {
                 });
         }
 
-        if (afrom && ato && humidity) {
-			search = true;
-			console.log(Date() + ' - GET /olive search by humidity');
+        if (afrom && ato && humidity == 'true') {
+            search = true;
+            console.log(Date() + ' - GET /olive search by humidity');
             db
                 .find({ HUMEDAD: { $gte: afrom, $lte: ato } })
                 .skip(offset)
@@ -119,9 +118,9 @@ oliveAPI.methods = function(app, BASE_URL, db, InitialDeliveryNotes, alldata) {
                 });
         }
 
-        if (afrom && ato && acidity) {
-			search = true;
-			console.log(Date() + ' - GET /olive search by acidity');
+        if (afrom && ato && acidity == 'true') {
+            search = true;
+            console.log(Date() + ' - GET /olive search by acidity');
             db
                 .find({ ACIDEZ: { $gte: afrom, $lte: ato } })
                 .skip(offset)
@@ -141,8 +140,8 @@ oliveAPI.methods = function(app, BASE_URL, db, InitialDeliveryNotes, alldata) {
         }
 
         if (kgs) {
-			search = true;
-			console.log(Date() + ' - GET /olive search by kilograms');
+            search = true;
+            console.log(Date() + ' - GET /olive search by kilograms');
             db
                 .find({ KGSACEITUNA: kgs })
                 .skip(offset)
@@ -160,31 +159,10 @@ oliveAPI.methods = function(app, BASE_URL, db, InitialDeliveryNotes, alldata) {
                     );
                 });
         }
-		
-		if (afrom && ato && year) {
-			search = true;
-			console.log(Date() + ' - GET /olive search by year interval');
-            db
-                .find({ ANYO: { $gte: afrom, $lte: ato } })
-                .skip(offset)
-                .limit(limit)
-                .toArray((err, olive) => {
-                    if (err) {
-                        console.error('Error accesing DataBase');
-                        res.sendStatus(500);
-                    }
-                    res.send(
-                        olive.map(x => {
-                            delete x._id;
-                            return x;
-                        })
-                    );
-                });
-        }
-		
-		if (afrom && ato && year && month) {
-			console.log(Date() + ' - GET /olive search by month interval in a year');
-			search = true
+
+        if (afrom && ato && year && month == 'true') {
+            console.log(Date() + ' - GET /olive search by month interval in a year');
+            search = true;
             db
                 .find({ ANYO: year, MES: { $gte: afrom, $lte: ato } })
                 .skip(offset)
@@ -202,12 +180,11 @@ oliveAPI.methods = function(app, BASE_URL, db, InitialDeliveryNotes, alldata) {
                     );
                 });
         }
-		
-		if (afrom && ato && year && month && day) {
-			console.log(Date() + ' - GET /olive search by day interval in a month of the year');
-			search = true;
+
+        if (!search) {
+            console.log(Date() + ' - GET /olive');
             db
-                .find({ ANYO: year, MES: month, DIA: { $gte: afrom, $lte: ato } })
+                .find({})
                 .skip(offset)
                 .limit(limit)
                 .toArray((err, olive) => {
@@ -223,44 +200,6 @@ oliveAPI.methods = function(app, BASE_URL, db, InitialDeliveryNotes, alldata) {
                     );
                 });
         }
-		
-		if(!search){
-			console.log(Date() + ' - GET /olive');
-			db
-            .find({})
-            .skip(offset)
-            .limit(limit)
-            .toArray((err, olive) => {
-                if (err) {
-                    console.error('Error accesing DataBase');
-                    res.sendStatus(500);
-                }
-                res.send(
-                    olive.map(x => {
-                        delete x._id;
-                        return x;
-                    })
-                );
-            });
-		   
-		   }
-/*
-        db
-            .find({})
-            .skip(offset)
-            .limit(limit)
-            .toArray((err, olive) => {
-                if (err) {
-                    console.error('Error accesing DataBase');
-                    res.sendStatus(500);
-                }
-                res.send(
-                    olive.map(x => {
-                        delete x._id;
-                        return x;
-                    })
-                );
-            });*/
     });
 
     app.get(BASE_URL + '/olive/:year', (req, res) => {
