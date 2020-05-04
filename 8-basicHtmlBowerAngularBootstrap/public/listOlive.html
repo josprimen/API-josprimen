@@ -1,0 +1,26 @@
+<table>
+    <thread>
+        <tr>
+            <th>DÍA</th>
+            <th>MES</th>
+            <th>AÑO</th>
+            <th>KILOS</th>
+            <th>RENDIMIENTO (%)</th>
+            <th>ACIDEZ (%)</th>
+            <th>HUMEDAD (%)</th>
+            <th>Nº ALBARÁN</th>
+        </tr>
+    </thread>
+    <tbody>
+        <tr ng-repeat="data in olivedata">
+            <td>{{data.DIA}}</td>
+            <td>{{data.MES}}</td>
+            <td>{{data.ANYO}}</td>
+            <td>{{data.KGSACEITUNA}}</td>
+            <td>{{data.RDTO}}</td>
+            <td>{{data.ACIDEZ}}</td>
+            <td>{{data.HUMEDAD}}</td>
+            <td>{{data.TICKET}}</td>
+        </tr>
+    </tbody>
+</table>
