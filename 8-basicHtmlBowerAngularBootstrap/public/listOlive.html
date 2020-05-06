@@ -1,26 +1,46 @@
-<table>
-    <thread>
+<table class="table">
+    <thead>
         <tr>
             <th>DÍA</th>
             <th>MES</th>
             <th>AÑO</th>
             <th>KILOS</th>
             <th>RENDIMIENTO (%)</th>
-            <th>ACIDEZ (%)</th>
             <th>HUMEDAD (%)</th>
+            <th>ACIDEZ (%)</th>
             <th>Nº ALBARÁN</th>
         </tr>
-    </thread>
+    </thead>
     <tbody>
+		<tr>
+			<td><input type="number" class="form-control" ng-model="newolive.DIA"></td>
+			<td><input type="number" class="form-control" ng-model="newolive.MES"></td>
+			<td><input type="number" class="form-control" ng-model="newolive.ANYO"></td>
+			<td><input type="number" class="form-control" ng-model="newolive.KGSACEITUNA"></td>
+			<td><input type="number" class="form-control" ng-model="newolive.RDTO"></td>
+			<td><input type="number" class="form-control" ng-model="newolive.HUMEDAD"></td>
+			<td><input type="number" class="form-control" ng-model="newolive.ACIDEZ"></td>
+			<td><input type="number" class="form-control" ng-model="newolive.TICKET"></td>
+			<td><button class="btn btn-primary" ng-click="newolivedata()">Create</button></td>
+		</tr>
         <tr ng-repeat="data in olivedata">
             <td>{{data.DIA}}</td>
             <td>{{data.MES}}</td>
             <td>{{data.ANYO}}</td>
             <td>{{data.KGSACEITUNA}}</td>
             <td>{{data.RDTO}}</td>
-            <td>{{data.ACIDEZ}}</td>
             <td>{{data.HUMEDAD}}</td>
+            <td>{{data.ACIDEZ}}</td>
             <td>{{data.TICKET}}</td>
+			<td><button class="btn btn-warning" ng-click="deleteticket(data.DIA, data.MES, data.ANYO, 				data.TICKET)">Delete</button></td>
         </tr>
     </tbody>
+	
+	<tfoot>
+		<tr>
+		  <td><div class="alert alert-success">{{success_status}}</div></td>
+		  <td><h5 class="alert alert-danger">{{error_status}}</h5></td>
+		</tr>
+  	</tfoot>
+	
 </table>
