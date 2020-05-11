@@ -38,8 +38,12 @@
 	
 	<tfoot>
 		<tr>
-		  <td><div class="alert alert-success">{{success_status}}</div></td>
-		  <td><h5 class="alert alert-danger">{{error_status}}</h5></td>
+			<td><button class="btn btn-danger" ng-click="deleteall()">Delete All</button></td>
+			<td><button class="btn btn-success" ng-click="initialdata()">Load Data</button></td>
+		</tr>
+		<tr>
+		  <td><div class="alert alert-success">{{status}}</div></td>
+		  <td><h5 class="alert alert-danger">{{error}}</h5></td>
 		</tr>
   	</tfoot>
 	
