@@ -18,30 +18,46 @@ angular.module('OliveApp').controller('DataCtrl', [
                 function successCallback(res) {
                     console.log('Getting ' + url);
                     $scope.olivedata = res.data;
-                    $.notify({title: '<strong>¡Ok!</strong>',message: 'Datos obtenidos correctamente'},{type: 'success'});
-					notify.close();
+                    $.notify(
+                        {
+                            title: '<strong>¡Ok!</strong>',
+                            message: 'Datos obtenidos correctamente'
+                        },
+                        { type: 'success' }
+                    );
+                    notify.close();
                 },
                 function errorCallBack(res) {
                     switch (res.status) {
                         case 404:
-							$.notify({title: '<strong>¡Ups!</strong>',message: 'La tabla está vacía, rellénela e inténtelo de nuevo'},{type:'danger'});
-							notify.close();
+                            $.notify(
+                                {
+                                    title: '<strong>¡Ups!</strong>',
+                                    message: 'La tabla está vacía, rellénela e inténtelo de nuevo'
+                                },
+                                { type: 'danger' }
+                            );
+                            notify.close();
                             $scope.olivedata = '';
                             break;
                         default:
-							$.notify({title: '<strong>¡Ups!</strong>',message: 'Algo ha ido mal, inténtalo más tarde.'},{type: 'danger'});
-							notify.close();
+                            $.notify(
+                                {
+                                    title: '<strong>¡Ups!</strong>',
+                                    message: 'Algo ha ido mal, inténtalo más tarde.'
+                                },
+                                { type: 'danger' }
+                            );
+                            notify.close();
                     }
                 }
             );
-        };
+        }
 
         getData();
-		
-		
-		function getDataAux(){
-			
-			$http.get(url).then(
+
+        function getDataAux() {
+            $http.get(url).then(
                 function successCallback(res) {
                     console.log('Getting ' + url);
                     $scope.olivedata = res.data;
@@ -52,36 +68,62 @@ angular.module('OliveApp').controller('DataCtrl', [
                             $scope.olivedata = '';
                             break;
                         default:
-							$.notify({title: '<strong>¡Ups!</strong>',message: 'Algo ha ido mal, inténtalo más tarde.'},{type: 'danger'});
-							notify.close();
+                            $.notify(
+                                {
+                                    title: '<strong>¡Ups!</strong>',
+                                    message: 'Algo ha ido mal, inténtalo más tarde.'
+                                },
+                                { type: 'danger' }
+                            );
+                            notify.close();
                     }
                 }
             );
-			
-		};
+        }
 
         $scope.newolivedata = function() {
             $http.post(url, $scope.newolive).then(
                 function successCallback(req, res) {
                     console.log('Posting to ' + url);
                     getDataAux();
-					$.notify({title: '<strong>¡Genial!</strong>',message: 'Albarán creado.'},{type: 'success'});
-					notify.close();
+                    $.notify(
+                        { title: '<strong>¡Genial!</strong>', message: 'Albarán creado.' },
+                        { type: 'success' }
+                    );
+                    notify.close();
                 },
                 function errorCallBack(res) {
-					console.log(res.status);
+                    console.log(res.status);
                     //$scope.status = res.status;
                     switch (res.status) {
                         case 500:
-                            $.notify({title: '<strong>¡Ups!</strong>',message: '¡Error accediendo a la base de datos!'},{type: 'danger'});
-							notify.close();
+                            $.notify(
+                                {
+                                    title: '<strong>¡Ups!</strong>',
+                                    message: '¡Error accediendo a la base de datos!'
+                                },
+                                { type: 'danger' }
+                            );
+                            notify.close();
                         case 409:
-							//$.notify('Ya existe un albarán con ese número.');
-							$.notify({title: '<strong>¡Error!</strong>',message: 'Ya existe un albarán con ese número.'},{type: 'danger'});
-							notify.close();
+                            //$.notify('Ya existe un albarán con ese número.');
+                            $.notify(
+                                {
+                                    title: '<strong>¡Error!</strong>',
+                                    message: 'Ya existe un albarán con ese número.'
+                                },
+                                { type: 'danger' }
+                            );
+                            notify.close();
                         case 400:
-							$.notify({title: '<strong>¡Atención!</strong>',message: '¡Rellene todos los campos!'},{type: 'warning'});
-							notify.close();
+                            $.notify(
+                                {
+                                    title: '<strong>¡Atención!</strong>',
+                                    message: '¡Rellene todos los campos!'
+                                },
+                                { type: 'warning' }
+                            );
+                            notify.close();
                     }
                 }
             );
@@ -91,14 +133,29 @@ angular.module('OliveApp').controller('DataCtrl', [
             $http.delete(url + '/' + year + '/' + month + '/' + day + '/' + ticket).then(
                 function successCallback(req, res) {
                     console.log('Deleting delivery note with number: ' + ticket);
-                    
+
                     getDataAux();
-					$.notify({title: '<strong>¡Ok!</strong>',message: 'El albarán número <strong>' + ticket + '</strong> se ha eliminado correctamente.'},{type: 'success'});
-					notify.close();
+                    $.notify(
+                        {
+                            title: '<strong>¡Ok!</strong>',
+                            message:
+                                'El albarán número <strong>' +
+                                ticket +
+                                '</strong> se ha eliminado correctamente.'
+                        },
+                        { type: 'success' }
+                    );
+                    notify.close();
                 },
                 function errorCallBack(req, res) {
-                    $.notify({title: '<strong>¡Ups!</strong>',message: 'Hubo un error al borrar el albarán.'},{type: 'danger'});
-					notify.close();
+                    $.notify(
+                        {
+                            title: '<strong>¡Ups!</strong>',
+                            message: 'Hubo un error al borrar el albarán.'
+                        },
+                        { type: 'danger' }
+                    );
+                    notify.close();
                 }
             );
         };
@@ -108,12 +165,24 @@ angular.module('OliveApp').controller('DataCtrl', [
                 function successCallback(res) {
                     console.log('Deleting all data');
                     getDataAux();
-					$.notify({title: '<strong>¡Ok!</strong>',message: 'Se han eliminado todos los datos correctamente.'},{type: 'warning'});
-					notify.close();
+                    $.notify(
+                        {
+                            title: '<strong>¡Ok!</strong>',
+                            message: 'Se han eliminado todos los datos correctamente.'
+                        },
+                        { type: 'warning' }
+                    );
+                    notify.close();
                 },
                 function errorCallBack(res) {
-                    $.notify({title: '<strong>¡Ups!</strong>',message: 'Algo ha ido mal, inténtalo más tarde.'},{type: 'danger'});
-					notify.close();
+                    $.notify(
+                        {
+                            title: '<strong>¡Ups!</strong>',
+                            message: 'Algo ha ido mal, inténtalo más tarde.'
+                        },
+                        { type: 'danger' }
+                    );
+                    notify.close();
                 }
             );
         };
@@ -122,15 +191,36 @@ angular.module('OliveApp').controller('DataCtrl', [
             $http.get(url + '/loadInitialData').then(
                 function successCallback(res) {
                     console.log('Getting initial data');
-					getDataAux();
-                   $.notify({title: '<strong>¡Ok!</strong>',message: 'Datos por defecto añadidos correctamente'},{type: 'success'});
-					notify.close();
+                    getDataAux();
+                    $.notify(
+                        {
+                            title: '<strong>¡Ok!</strong>',
+                            message: 'Datos por defecto añadidos correctamente'
+                        },
+                        { type: 'success' }
+                    );
+                    notify.close();
                 },
                 function errorCallBack(res) {
-                    $.notify({title: '<strong>¡Ups!</strong>',message: 'Algo ha ido mal, inténtalo más tarde.'},{type: 'danger'});
-					notify.close();
+                    $.notify(
+                        {
+                            title: '<strong>¡Ups!</strong>',
+                            message: 'Algo ha ido mal, inténtalo más tarde.'
+                        },
+                        { type: 'danger' }
+                    );
+                    notify.close();
                 }
             );
+        };
+        $scope.popoverfunction = function() {
+            //Popover function code
+            $(function() {
+                $('[data-toggle="popover"]').popover({
+                    html: true,
+                    sanitize: false
+                });
+            });
         };
     }
 ]);

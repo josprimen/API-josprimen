@@ -1,1 +1,136 @@
-<button class="btn btn-danger" ng-click="notify()">Notificación</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
+<a href="" data-toggle="modal" data-target="#exampleModal"> cosa</a>
+
+
+<a href="" data-toggle="modal" data-target="#exampleModal"> cosa2</a>
+
+<button type="button" class="btn btn-outline-warning" data-toggle="popover" data-placement="left" title="Albarán:" data-html="true" container="body" data-content=
+		
+		
+		
+		'<form ng-click="updateDelivery()">
+	<div class="form-group">
+    <label class="label label-default">Día:</label>
+  <input type="number" class="form-control" value="data.DÍA">
+  </div>
+	<div class="form-group">
+    <label class="label label-default">Mes:</label>
+  <input type="number" class="form-control" value="data.MES">
+  </div>
+	<div class="form-group">
+  <label class="label label-default">Año:</label>
+  <input type="number" class="form-control" value="data.ANYO">
+  </div>
+	<div class="form-group">
+  <label class="label label-default">Kilogramos:</label>
+  <input type="number" class="form-control" value="data.KGSACEITUNA"> 
+  </div>
+	<div class="form-group">
+  <label class="label label-default">Rendimiento (%):</label>
+  <input type="number" class="form-control" value="data.RDTO"> 
+  </div>
+	<div class="form-group">
+  <label class="label label-default">Humedad (%):</label>
+  <input type="number" class="form-control" value="data.HUMEDAD">
+  </div>
+	<div class="form-group">
+  <label class="label label-default">Acidez (%):</label>
+  <input type="number" class="form-control" value="data.ACIDEZ">
+  </div>
+	<div class="form-group">
+  <label class="label label-default">Nº Albarán (%):</label>
+  <input type="number" class="form-control" value="data.TICKET"> 
+  </div>
+  <input type="submit" value="Submit">
+</form>'
+		
+		
+		
+		
+		>Edit</button>
+
+
+<a data-title="A Title" data-placement="top" data-html="true" data-content="<form><input type='text'/></form>" data-trigger="hover" rel="popover" class="btn btn-primary" id="test">Top popover</a>
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<form ng-click="updateDelivery()">
+	<div class="form-group">
+    <label class="label label-default">Día:</label><br>
+  <input type="number" class="form-control" value="data.DÍA"><br>
+  </div>
+	<div class="form-group">
+    <label class="label label-default">Mes:</label><br>
+  <input type="number" class="form-control" value="data.MES"><br>
+  </div>
+	<div class="form-group">
+  <label class="label label-default">Año:</label><br>
+  <input type="number" class="form-control" value="data.ANYO"><br>  
+  </div>
+	<div class="form-group">
+  <label class="label label-default">Kilogramos:</label><br>
+  <input type="number" class="form-control" value="data.KGSACEITUNA"><br>  
+  </div>
+	<div class="form-group">
+  <label class="label label-default">Rendimiento (%):</label><br>
+  <input type="number" class="form-control" value="data.RDTO"><br>  
+  </div>
+	<div class="form-group">
+  <label class="label label-default">Humedad (%):</label><br>
+  <input type="number" class="form-control" value="data.HUMEDAD"><br>  
+  </div>
+	<div class="form-group">
+  <label class="label label-default">Acidez (%):</label><br>
+  <input type="number" class="form-control" value="data.ACIDEZ"><br>  
+  </div>
+	<div class="form-group">
+  <label class="label label-default">Nº Albarán (%):</label><br>
+  <input type="number" class="form-control" value="data.TICKET"><br>  
+  </div>
+  <br>
+  <input type="submit" value="Submit">
+</form>
+
+
+
+
+<div>
+	{{olivedata}}
+</div>

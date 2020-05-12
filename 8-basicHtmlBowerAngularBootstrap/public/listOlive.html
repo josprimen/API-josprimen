@@ -12,17 +12,35 @@
         </tr>
     </thead>
     <tbody>
-		<tr>
-			<td><input type="number" class="form-control" ng-model="newolive.DIA"></td>
-			<td><input type="number" class="form-control" ng-model="newolive.MES"></td>
-			<td><input type="number" class="form-control" ng-model="newolive.ANYO"></td>
-			<td><input type="number" class="form-control" ng-model="newolive.KGSACEITUNA"></td>
-			<td><input type="number" class="form-control" ng-model="newolive.RDTO"></td>
-			<td><input type="number" class="form-control" ng-model="newolive.HUMEDAD"></td>
-			<td><input type="number" class="form-control" ng-model="newolive.ACIDEZ"></td>
-			<td><input type="number" class="form-control" ng-model="newolive.TICKET"></td>
-			<td><button class="btn btn-primary" ng-click="newolivedata()">Create</button></td>
-		</tr>
+        <tr>
+            <td>
+                <input type="number" class="form-control" ng-model="newolive.DIA">
+            </td>
+            <td>
+                <input type="number" class="form-control" ng-model="newolive.MES">
+            </td>
+            <td>
+                <input type="number" class="form-control" ng-model="newolive.ANYO">
+            </td>
+            <td>
+                <input type="number" class="form-control" ng-model="newolive.KGSACEITUNA">
+            </td>
+            <td>
+                <input type="number" class="form-control" ng-model="newolive.RDTO">
+            </td>
+            <td>
+                <input type="number" class="form-control" ng-model="newolive.HUMEDAD">
+            </td>
+            <td>
+                <input type="number" class="form-control" ng-model="newolive.ACIDEZ">
+            </td>
+            <td>
+                <input type="number" class="form-control" ng-model="newolive.TICKET">
+            </td>
+            <td>
+                <button class="btn btn-outline-primary" ng-click="newolivedata()">Create</button>
+            </td>
+        </tr>
         <tr ng-repeat="data in olivedata">
             <td>{{data.DIA}}</td>
             <td>{{data.MES}}</td>
@@ -32,19 +50,59 @@
             <td>{{data.HUMEDAD}}</td>
             <td>{{data.ACIDEZ}}</td>
             <td>{{data.TICKET}}</td>
-			<td><button class="btn btn-warning" ng-click="deleteticket(data.DIA, data.MES, data.ANYO, 				data.TICKET)">Delete</button></td>
+            <td>
+                <button class="btn btn-outline-danger" ng-click="deleteticket(data.DIA, data.MES, data.ANYO, data.TICKET)">Delete</button>
+            </td>
+            <td>
+                <button type="button" class="btn btn-outline-warning" ng-click="popoverfunction()" data-toggle="popover" data-placement="left" title="Albarán:" data-html="true" container="body" data-content='<form ng-click="updateDelivery()">
+	<div class="form-group">
+    <label class="badge badge-secondary">Día:</label>
+  <input type="number" class="form-control" value={{data.DIA}}>
+  </div>
+	<div class="form-group">
+    <label class="badge badge-secondary">Mes:</label>
+  <input type="number" class="form-control" value={{data.MES}}>
+  </div>
+	<div class="form-group">
+  <label class="badge badge-secondary">Año:</label>
+  <input type="number" class="form-control" value={{data.ANYO}}>
+  </div>
+	<div class="form-group">
+  <label class="badge badge-secondary">Kilogramos:</label>
+  <input type="number" class="form-control" value={{data.KGSACEITUNA}}> 
+  </div>
+	<div class="form-group">
+  <label class="badge badge-secondary">Rendimiento (%):</label>
+  <input type="number" class="form-control" value={{data.RDTO}}> 
+  </div>
+	<div class="form-group">
+  <label class="badge badge-secondary">Humedad (%):</label>
+  <input type="number" class="form-control" value={{data.HUMEDAD}}>
+  </div>
+	<div class="form-group">
+  <label class="badge badge-secondary">Acidez (%):</label>
+  <input type="number" class="form-control" value={{data.ACIDEZ}}>
+  </div>
+	<div class="form-group">
+  <label class="badge badge-secondary">Nº Albarán (%):</label>
+  <input type="number" class="form-control" value={{data.TICKET}}> 
+  </div>
+  <button class="btn btn-outline-primary" ng-click="updateolivedata()">Actualizar</button>
+  <button class="btn btn-outline-danger" >Cancelar</button>
+</form>'>Edit</button>
+            </td>
         </tr>
     </tbody>
-	
-	<tfoot>
-		<tr>
-			<td><button class="btn btn-danger" ng-click="deleteall()">Delete All</button></td>
-			<td><button class="btn btn-success" ng-click="initialdata()">Load Data</button></td>
-		</tr>
-		<tr>
-		  <td><div class="alert alert-success">{{status}}</div></td>
-		  <td><h5 class="alert alert-danger">{{error}}</h5></td>
-		</tr>
-  	</tfoot>
-	
+
+    <tfoot>
+        <tr>
+            <td>
+                <button class="btn btn-outline-danger" ng-click="deleteall()">Delete All</button>
+            </td>
+            <td>
+                <button class="btn btn-outline-success" ng-click="initialdata()">Load Data</button>
+            </td>
+        </tr>
+    </tfoot>
+
 </table>
