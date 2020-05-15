@@ -54,41 +54,41 @@
                 <button class="btn btn-outline-danger" ng-click="deleteticket(data.DIA, data.MES, data.ANYO, data.TICKET)">Delete</button>
             </td>
             <td>
-                <button type="button" class="btn btn-outline-warning" ng-click="popoverfunction()" data-toggle="popover" data-placement="left" title="Albarán:" data-html="true" container="body" data-content='<form ng-click="updateDelivery()">
+                <button type="button" class="btn btn-outline-warning" ng-click="popoverfunction()" data-toggle="popover" data-placement="left" title="Albarán:" data-html="true" container="body" data-content='<form>
 	<div class="form-group">
     <label class="badge badge-secondary">Día:</label>
-  <input type="number" class="form-control" value={{data.DIA}}>
+  <input type="number" class="form-control" id="dayupdate" value={{data.DIA}}>
   </div>
 	<div class="form-group">
     <label class="badge badge-secondary">Mes:</label>
-  <input type="number" class="form-control" value={{data.MES}}>
+  <input type="number" class="form-control" id="monthupdate" value={{data.MES}}>
   </div>
 	<div class="form-group">
   <label class="badge badge-secondary">Año:</label>
-  <input type="number" class="form-control" value={{data.ANYO}}>
+  <input type="number" class="form-control" id="yearupdate" value={{data.ANYO}}>
   </div>
 	<div class="form-group">
   <label class="badge badge-secondary">Kilogramos:</label>
-  <input type="number" class="form-control" value={{data.KGSACEITUNA}}> 
+  <input type="number" class="form-control" id="kgsupdate" value={{data.KGSACEITUNA}}> 
   </div>
 	<div class="form-group">
   <label class="badge badge-secondary">Rendimiento (%):</label>
-  <input type="number" class="form-control" value={{data.RDTO}}> 
+  <input type="number" class="form-control" id="rdtoupdate" value={{data.RDTO}}> 
   </div>
 	<div class="form-group">
   <label class="badge badge-secondary">Humedad (%):</label>
-  <input type="number" class="form-control" value={{data.HUMEDAD}}>
+  <input type="number" class="form-control" id="humidityupdate" value={{data.HUMEDAD}}>
   </div>
 	<div class="form-group">
   <label class="badge badge-secondary">Acidez (%):</label>
-  <input type="number" class="form-control" value={{data.ACIDEZ}}>
+  <input type="number" class="form-control" id="acidityupdate" value={{data.ACIDEZ}}>
   </div>
 	<div class="form-group">
   <label class="badge badge-secondary">Nº Albarán (%):</label>
-  <input type="number" class="form-control" value={{data.TICKET}}> 
+  <input type="number" class="form-control" id="ticketupdate" value={{data.TICKET}}> 
   </div>
-  <button class="btn btn-outline-primary" ng-click="updateolivedata()">Actualizar</button>
-  <button class="btn btn-outline-danger" >Cancelar</button>
+  <button class="btn btn-outline-primary" id="updateolivedata">Actualizar</button>
+  <button class="btn btn-outline-danger" id="cancel" >Cancelar</button>
 </form>'>Edit</button>
             </td>
         </tr>

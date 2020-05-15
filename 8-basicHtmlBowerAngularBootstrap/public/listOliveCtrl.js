@@ -213,6 +213,7 @@ angular.module('OliveApp').controller('DataCtrl', [
                 }
             );
         };
+
         $scope.popoverfunction = function() {
             //Popover function code
             $(function() {
@@ -221,6 +222,86 @@ angular.module('OliveApp').controller('DataCtrl', [
                     sanitize: false
                 });
             });
+        };
+		
+
+		$(document).on('click', '.popover .btn', function() {
+			console.log("LA ID: " + this.id);
+			if (this.id == "cancel"){
+				console.log("Que me han dao porculo");
+				$(this)
+                .parents('.popover')
+                .popover('hide');
+			}if(this.id=="updateolivedata"){
+				var updatedday=Number($('#dayupdate').val());
+				var updatedmonth=Number($('#monthupdate').val());
+				var updatedyear=Number($('#yearupdate').val());
+				var updatedticket=Number($('#ticketupdate').val());
+				var updatedhumidity=Number($('#humidityupdate').val());
+				var updatedacidity=Number($('#acidityupdate').val());
+				var updatedkgs=Number($('#kgsupdate').val());
+				var updatedrdto=Number($('#rdtoupdate').val());
+				var updateddeliverydata = {
+				DIA: updatedday,
+				MES: updatedmonth,
+				ANYO: updatedyear,
+				KGSACEITUNA: updatedkgs,
+				RDTO: updatedrdto,
+				HUMEDAD: updatedhumidity,
+				ACIDEZ: updatedacidity,
+				TICKET: updatedticket
+				};
+				console.log("Estoy viejo y desorientado" + JSON.stringify(updateddeliverydata));
+				$(this)
+                .parents('.popover')
+                .popover('hide');
+				$http.put(url + '/' + updatedyear + '/' + updatedmonth + '/' + updatedday + '/' + updatedticket, updateddeliverydata).then(
+                function successCallback(req, res) {
+                    console.log('Putting to ' + url);
+                    getDataAux();
+                    $.notify(
+                        {
+                            title: '<strong>¡Genial!</strong>',
+                            message:
+                                'Albarán número ' + updateolive.TICKET + ' ha sido actualizado.'
+                        },
+                        { type: 'success' }
+                    );
+                    notify.close();
+                },
+                function errorCallBack(res) {
+                    console.log(res.status);
+                    //$scope.status = res.status;
+                    switch (res.status) {
+                        case 409:
+                            //$.notify('Ya existe un albarán con ese número.');
+                            $.notify(
+                                {
+                                    title: '<strong>¡Error!</strong>',
+                                    message: 'Revisa el número de albarán.'
+                                },
+                                { type: 'warning' }
+                            );
+                            notify.close();
+                        default:
+                            $.notify(
+                                {
+                                    title: '<strong>¡Ups!</strong>',
+                                    message: 'Algo ha ido mal, inténtalo más tarde.'
+                                },
+                                { type: 'danger' }
+                            );
+                            notify.close();
+                    }
+                }
+            );
+				
+			}
+        });
+		
+
+        $scope.updateolivedata = function() {
+            
         };
     }
 ]);
