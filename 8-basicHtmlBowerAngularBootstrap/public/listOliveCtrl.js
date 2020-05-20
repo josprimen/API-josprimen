@@ -23,7 +23,14 @@ angular.module('OliveApp').controller('DataCtrl', [
                             title: '<strong>¡Ok!</strong>',
                             message: 'Datos obtenidos correctamente'
                         },
-                        { type: 'success' }
+                        {
+                            type: 'success',
+                            offset: 60,
+                            animate: {
+                                enter: 'animated fadeInRight',
+                                exit: 'animated fadeOutRight'
+                            }
+                        }
                     );
                     //notify.close();
                 },
@@ -35,7 +42,14 @@ angular.module('OliveApp').controller('DataCtrl', [
                                     title: '<strong>¡Ups!</strong>',
                                     message: 'La tabla está vacía, rellénela e inténtelo de nuevo'
                                 },
-                                { type: 'danger' }
+                                {
+                                    type: 'danger',
+                                    offset: 60,
+                                    animate: {
+                                        enter: 'animated fadeInRight',
+                                        exit: 'animated fadeOutRight'
+                                    }
+                                }
                             );
                             //notify.close();
                             $scope.olivedata = '';
@@ -46,7 +60,14 @@ angular.module('OliveApp').controller('DataCtrl', [
                                     title: '<strong>¡Ups!</strong>',
                                     message: 'Algo ha ido mal, inténtalo más tarde.'
                                 },
-                                { type: 'danger' }
+                                {
+                                    type: 'danger',
+                                    offset: 60,
+                                    animate: {
+                                        enter: 'animated fadeInRight',
+                                        exit: 'animated fadeOutRight'
+                                    }
+                                }
                             );
                         //notify.close();
                     }
@@ -73,7 +94,14 @@ angular.module('OliveApp').controller('DataCtrl', [
                                     title: '<strong>¡Ups!</strong>',
                                     message: 'Algo ha ido mal, inténtalo más tarde.'
                                 },
-                                { type: 'danger' }
+                                {
+                                    type: 'danger',
+                                    offset: 60,
+                                    animate: {
+                                        enter: 'animated fadeInRight',
+                                        exit: 'animated fadeOutRight'
+                                    }
+                                }
                             );
                         //notify.close();
                     }
@@ -88,7 +116,14 @@ angular.module('OliveApp').controller('DataCtrl', [
                     getDataAux();
                     var notify = $.notify(
                         { title: '<strong>¡Genial!</strong>', message: 'Albarán creado.' },
-                        { type: 'success' }
+                        {
+                            type: 'success',
+                            offset: 60,
+                            animate: {
+                                enter: 'animated fadeInRight',
+                                exit: 'animated fadeOutRight'
+                            }
+                        }
                     );
                     //notify.close();
                 },
@@ -102,7 +137,14 @@ angular.module('OliveApp').controller('DataCtrl', [
                                     title: '<strong>¡Ups!</strong>',
                                     message: '¡Error accediendo a la base de datos!'
                                 },
-                                { type: 'danger' }
+                                {
+                                    type: 'danger',
+                                    offset: 60,
+                                    animate: {
+                                        enter: 'animated fadeInRight',
+                                        exit: 'animated fadeOutRight'
+                                    }
+                                }
                             );
                         //notify.close();
                         case 409:
@@ -112,7 +154,14 @@ angular.module('OliveApp').controller('DataCtrl', [
                                     title: '<strong>¡Error!</strong>',
                                     message: 'Ya existe un albarán con ese número.'
                                 },
-                                { type: 'danger' }
+                                {
+                                    type: 'danger',
+                                    offset: 60,
+                                    animate: {
+                                        enter: 'animated fadeInRight',
+                                        exit: 'animated fadeOutRight'
+                                    }
+                                }
                             );
                         //notify.close();
                         case 400:
@@ -121,7 +170,14 @@ angular.module('OliveApp').controller('DataCtrl', [
                                     title: '<strong>¡Atención!</strong>',
                                     message: '¡Rellene todos los campos!'
                                 },
-                                { type: 'warning' }
+                                {
+                                    type: 'warning',
+                                    offset: 60,
+                                    animate: {
+                                        enter: 'animated fadeInRight',
+                                        exit: 'animated fadeOutRight'
+                                    }
+                                }
                             );
                         //notify.close();
                     }
@@ -143,7 +199,14 @@ angular.module('OliveApp').controller('DataCtrl', [
                                 ticket +
                                 '</strong> se ha eliminado correctamente.'
                         },
-                        { type: 'success' }
+                        {
+                            type: 'success',
+                            offset: 60,
+                            animate: {
+                                enter: 'animated fadeInRight',
+                                exit: 'animated fadeOutRight'
+                            }
+                        }
                     );
                     //notify.close();
                 },
@@ -153,7 +216,14 @@ angular.module('OliveApp').controller('DataCtrl', [
                             title: '<strong>¡Ups!</strong>',
                             message: 'Hubo un error al borrar el albarán.'
                         },
-                        { type: 'danger' }
+                        {
+                            type: 'danger',
+                            offset: 60,
+                            animate: {
+                                enter: 'animated fadeInRight',
+                                exit: 'animated fadeOutRight'
+                            }
+                        }
                     );
                     //notify.close();
                 }
@@ -170,7 +240,14 @@ angular.module('OliveApp').controller('DataCtrl', [
                             title: '<strong>¡Ok!</strong>',
                             message: 'Se han eliminado todos los datos correctamente.'
                         },
-                        { type: 'warning' }
+                        {
+                            type: 'warning',
+                            offset: 60,
+                            animate: {
+                                enter: 'animated fadeInRight',
+                                exit: 'animated fadeOutRight'
+                            }
+                        }
                     );
                     //notify.close();
                 },
@@ -180,7 +257,14 @@ angular.module('OliveApp').controller('DataCtrl', [
                             title: '<strong>¡Ups!</strong>',
                             message: 'Algo ha ido mal, inténtalo más tarde.'
                         },
-                        { type: 'danger' }
+                        {
+                            type: 'danger',
+                            offset: 60,
+                            animate: {
+                                enter: 'animated fadeInRight',
+                                exit: 'animated fadeOutRight'
+                            }
+                        }
                     );
                     //notify.close();
                 }
@@ -197,7 +281,14 @@ angular.module('OliveApp').controller('DataCtrl', [
                             title: '<strong>¡Ok!</strong>',
                             message: 'Datos por defecto añadidos correctamente'
                         },
-                        { type: 'success' }
+                        {
+                            type: 'success',
+                            offset: 60,
+                            animate: {
+                                enter: 'animated fadeInRight',
+                                exit: 'animated fadeOutRight'
+                            }
+                        }
                     );
                     //notify.close();
                 },
@@ -207,7 +298,14 @@ angular.module('OliveApp').controller('DataCtrl', [
                             title: '<strong>¡Ups!</strong>',
                             message: 'Algo ha ido mal, inténtalo más tarde.'
                         },
-                        { type: 'danger' }
+                        {
+                            type: 'danger',
+                            offset: 60,
+                            animate: {
+                                enter: 'animated fadeInRight',
+                                exit: 'animated fadeOutRight'
+                            }
+                        }
                     );
                     //notify.close();
                 }
@@ -287,7 +385,14 @@ angular.module('OliveApp').controller('DataCtrl', [
                                     message:
                                         'Albarán número ' + updatedticket + ' ha sido actualizado.'
                                 },
-                                { type: 'success' }
+                                {
+                                    type: 'success',
+                                    offset: 60,
+                                    animate: {
+                                        enter: 'animated fadeInRight',
+                                        exit: 'animated fadeOutRight'
+                                    }
+                                }
                             );
                             //notify.close();
                         },
@@ -300,7 +405,14 @@ angular.module('OliveApp').controller('DataCtrl', [
                                             title: '<strong>¡Ups!</strong>',
                                             message: 'Algo ha ido mal, inténtalo más tarde.'
                                         },
-                                        { type: 'danger' }
+                                        {
+                                            type: 'danger',
+                                            offset: 60,
+                                            animate: {
+                                                enter: 'animated fadeInRight',
+                                                exit: 'animated fadeOutRight'
+                                            }
+                                        }
                                     );
                                 //notify.close();
                             }
