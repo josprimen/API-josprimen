@@ -4,17 +4,20 @@ angular.module('OliveApp').controller('DataCtrl', [
     function($scope, $http) {
         console.log('Data controller initialized!!');
         var url = '/josprimenapi/v1/olive';
+		
+/*#GE------------------------------VARIABLES---------------------------*/
 
-        /*function getData() {
-            $http.get(url).then(function(res) {
-                console.log('Getting ' + url);
-                $scope.olivedata = res.data;
-				//$scope.success_status = res.status;
-            });
-        }*/
+		$scope.offset = 0;
+		$scope.limit = 15;
+        $scope.page1 = 1;
+		$scope.page2 = 2;
+		$scope.page3 = 3;
 
+
+/*#GE------------------------------GETTERS---------------------------*/
+		
         function getData() {
-            $http.get(url).then(
+            $http.get(url + "?limit=" + $scope.limit +"&offset=" + $scope.offset).then(
                 function successCallback(res) {
                     console.log('Getting ' + url);
                     $scope.olivedata = res.data;
@@ -74,11 +77,13 @@ angular.module('OliveApp').controller('DataCtrl', [
                 }
             );
         }
+		
+		
+		getData();
 
-        getData();
 
         function getDataAux() {
-            $http.get(url).then(
+            $http.get(url + "?limit=" + $scope.limit +"&offset=" + $scope.offset).then(
                 function successCallback(res) {
                     console.log('Getting ' + url);
                     $scope.olivedata = res.data;
@@ -108,6 +113,9 @@ angular.module('OliveApp').controller('DataCtrl', [
                 }
             );
         }
+
+
+/*#GE------------------------------POST---------------------------*/
 
         $scope.newolivedata = function() {
             $http.post(url, $scope.newolive).then(
@@ -184,6 +192,9 @@ angular.module('OliveApp').controller('DataCtrl', [
                 }
             );
         };
+
+
+/*#GE------------------------------DELETES---------------------------*/
 
         $scope.deleteticket = function(day, month, year, ticket) {
             $http.delete(url + '/' + year + '/' + month + '/' + day + '/' + ticket).then(
@@ -271,6 +282,9 @@ angular.module('OliveApp').controller('DataCtrl', [
             );
         };
 
+
+/*#GE------------------------------LOAD INITIAL DATA---------------------------*/
+
         $scope.initialdata = function(res) {
             $http.get(url + '/loadInitialData').then(
                 function successCallback(res) {
@@ -311,6 +325,11 @@ angular.module('OliveApp').controller('DataCtrl', [
                 }
             );
         };
+
+
+/*#GE------------------------------POPOVER FUNCTION AND PUT (JQUERY)---------------------------*/
+		/*--Complex Bootstrap objects needs functionality and it do it with jquery. Bootstrap.ui works with angular js, but not the normal Bootstrap library--*/
+
 
         $scope.popoverfunction = function() {
             //Popover function code
@@ -420,5 +439,59 @@ angular.module('OliveApp').controller('DataCtrl', [
                     );
             }
         });
+
+
+
+		/*------------------------------PAGINATION---------------------------*/
+
+		$scope.previouspage = function(){
+			if($scope.page1>1){
+				$scope.page1--;
+				$scope.page2--;
+				$scope.page3--;
+				$scope.offset -= $scope.limit;
+				getDataAux();
+			}
+		};
+		
+		$scope.nextpage = function() {
+			var objectsnumber = 0;
+			var maxpage = null;
+			$http.get(url).then(function(res) {
+				if (res.data.length != 0) {
+					objectsnumber = res.data.length;
+				}
+				if (objectsnumber != 0) {
+					if (objectsnumber % $scope.limit == 0) {
+						maxpage = parseInt(objectsnumber / $scope.limit);
+					} else {
+						maxpage = parseInt(objectsnumber / $scope.limit) + 1;
+					}
+				}
+				if (!($scope.page1 + 1 > maxpage)) {
+					$scope.page1++;
+					$scope.page2++;
+					$scope.page3++;
+					$scope.offset += $scope.limit;
+					getDataAux();
+				}else{
+					var notify = $.notify(
+						{
+							title: '<strong>¡Ups!</strong>',
+							message: 'Ya no existen más datos.'
+						},
+						{
+							type: 'warning',
+							offset: 60,
+							animate: {
+								enter: 'animated fadeInRight',
+								exit: 'animated fadeOutRight'
+							}
+						}
+					);
+				}
+			});
+		};
+
     }
 ]);

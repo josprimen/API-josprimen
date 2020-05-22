@@ -5,32 +5,66 @@ angular.module('OliveApp').controller('EditCtrl', [
     function($scope, $http) {
         console.log('Data controller initialized!!');
 
-        var url = '/josprimenapi/v1/olive';
+        
+		
+		$http.get("https://sos1718-08.herokuapp.com/api/v2/crimes-an/").then(function(response) {
 
-        function getData() {
-            $http.get(url).then(function successCallback(res) {
-                console.log('Getting ' + url);
-                $scope.olivedata = res.data;
+            Highcharts.chart('contenedor', {
+            chart: {
+                type: 'area'
+            },
+            title: {
+                text: 'Crimes'
+            },
+
+            yAxis: {
+                title: {
+                    text: 'Valor'
+                }
+            },
+            xAxis: {
+                categories: response.data.map(function(d) {return d.year + " " + d.province + " " + d.gender})
+            },
+            tooltip: {
+                pointFormat: '{series.name} had stockpiled <b>{point.y:,.0f}</b><br/>warheads in {point.x}'
+            },
+            plotOptions: {
+                area: {
+                    //pointStart: 1940,
+                    marker: {
+                        enabled: false,
+                        symbol: 'circle',
+                        radius: 2,
+                        states: {
+                            hover: {
+                                enabled: true
+                            }
+                        }
+                    }
+                }
+            },
+            series: [{
+                    name: 'OneCrime',
+                    data: response.data.map(function(d) { return d.onecrime })
+                },
+                {
+                    name: 'TwoCrime',
+                    data: response.data.map(function(d) { return d.twocrime })
+                },
+                {
+                    name: 'ThreeCrime',
+                    data: response.data.map(function(d) { return d.threecrime })
+                },
+                {
+                    name: 'MoreThreeCrime',
+                    data: response.data.map(function(d) { return d.morethreecrime })
+                }
+            ]
             });
-        }
 
-        getData();
-
-        $(function() {
-            $('[data-toggle="popover"]').popover({
-                html: true,
-                sanitize: false
             });
-        });
-
-        $(document).on('click', '.popover .btn', function() {
-			console.log("LA ID: " + this.id);
-			if (this.id == "cancel"){
-				console.log("Que me han dao porculo");
-				$(this)
-                .parents('.popover')
-                .popover('hide');
-			}
-        });
+		
+		
+		
     }
 ]);
