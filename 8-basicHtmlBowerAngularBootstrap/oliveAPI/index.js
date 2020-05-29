@@ -7,7 +7,8 @@ oliveAPI.methods = function(app, BASE_URL, db, InitialDeliveryNotes, alldata) {
 
     /* INDEX FOR SEARCHING. PRESS CTRL + F AND WRITE THE DIMINUTIVE FROM THE LEFT*/
     /* 
-#I1 -----> INITIAL INSERTION
+#I1
+-----> INITIAL INSERTION
 #I2 -----> INITIALIZER 
 #MA -----> ALLOWED METHODS
 #GE -----> GETTERS

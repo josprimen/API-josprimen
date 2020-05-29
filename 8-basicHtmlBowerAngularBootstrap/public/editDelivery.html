@@ -1,1 +1,319 @@
- <div id='contenedor'></div>
+<!------------------------------------- Header ------------------------------------->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top">
+    <a class="navbar-brand">¡Bienvenido!</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+        <!--ml or mr to left or right navbar-->
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link btn-github" href="https://github.com/josprimen/API-josprimen" target="_blank">
+                    <span class="fa fa-github"></span> Github</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="https://documenter.getpostman.com/view/3950150/SzYdRw3B?version=latest" target="_blank">Test</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!------------------------------------- Confirmation Modals ------------------------------------->
+
+<div class="modal fade" id="deleteOneModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white" id="header">
+                <h5 class="modal-title text-center" id="dangertitle">¡Cuidado!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ¿Seguro que quiere eliminar este albarán? Se eliminará de manera permanente y no podrá recuperarlo.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal" ng-click="deleteticket()">Estoy seguro, eliminar.</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteAllModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white" id="header">
+                <h5 class="modal-title text-center" id="dangertitle">¡Cuidado!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ¿Seguro que quiere eliminar todos los datos? Se eliminarán de manera permanente y no podrá recuperarlos.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal" ng-click="deleteall()">Estoy seguro, eliminar.</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="initialDataModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white" id="header">
+                <h5 class="modal-title text-center" id="dangertitle">¡Cuidado!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Si carga los datos predeterminados se borrarán todos los datos existentes actualmente. Está función solo existe para comprobar el funcionamiento de la web.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal" ng-click="initialdata()">Estoy seguro, carga los datos predeterminados.</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!------------------------------------- Page Content ------------------------------------->
+
+<!------------------------------------- Jumbotron ------------------------------------->
+<div class="container">
+    <header class="jumbotron my-4" id="editjumbo">
+        <h4 class="display-3">Búsquedas</h4>
+        <div class="row">
+            <div class="col-sm-6">
+                <table class="table">
+                    <thead>
+                        <div class="form-group">
+                            <label class="label label-info" for="exampleFormControlSelect1">Búsqueda por intervalo</label>
+                            <select ng-model="selected" class="form-control" id="exampleFormControlSelect1">
+								<option selected value="">Elija una opción</option>
+                                <option value="RDTO">Rendimiento</option>
+                                <option value="HUMEDAD">Humedad</option>
+                                <option value="ACIDEZ">Acidez</option>
+                            </select>
+                        </div>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input type="number" class="form-control" placeholder="Desde" ng-model="from">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" placeholder="Hasta" ng-model="to">
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-6">
+                <label class="label label-info" for="exampleFormControlSelect1">Búsqueda de valores concretos</label>
+                <div class="md-form mt-0">
+                    <input class="form-control" type="text" placeholder="Ejemplo: 2015/10/21/3" aria-label="Search" ng-model="searchurl">
+                </div>
+                <small class="form-text text-muted">Año
+                    <br> Año/Mes
+                    <br>Año/Mes/día
+                    <br> Año/Mes/Día/Albarán
+                    <br>
+                    <br>
+                </small>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <button class="btn btn-outline-secondary btn-rounded btn-sm my-0 btn-block" type="submit" ng-click="intervalsearch()">Search <i class="fa fa-search" aria-hidden="true"></i></button>
+                    </div>
+                    <div class="col-sm-6">
+                        <button class="btn btn-outline-secondary btn-rounded btn-sm my-0 btn-block" type="submit" ng-click="normalsearch()">Search <i class="fa fa-search" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container" id="jumbobuttons">
+                <tr>
+                    <button class="btn btn-outline-secondary btn-block" ng-click="showalldata()">Mostrar todos los datos <i class="fa fa-file" aria-hidden="true"></i></button>
+
+                </tr>
+                <tr>
+                    <button class="btn btn-outline-secondary btn-block" >Descargar datos en Excel <i class="fa fa-file-excel-o" aria-hidden="true"></i></button>
+
+                </tr>
+                <br>
+            </div>
+
+        </div>
+    </header>
+</div>
+
+<!------------------------------------- Table ------------------------------------->
+
+<div class="container">
+    <table class="table table-hover">
+        <!------------------------------------- Table Head------------------------------------->
+        <thead class="thead-dark">
+            <tr>
+                <th class="text-center">DÍA</th>
+                <th class="text-center">MES</th>
+                <th class="text-center">AÑO</th>
+                <th class="text-center">KILOS</th>
+                <th class="text-center text-nowrap">RENDIMIENTO (%)</th>
+                <th class="text-center text-nowrap">HUMEDAD (%)</th>
+                <th class="text-center text-nowrap">ACIDEZ (%)</th>
+                <th class="text-center text-nowrap">Nº ALBARÁN</th>
+                <!------------------------------------- Pagination ------------------------------------->
+                <th colspan=2>
+                    <nav>
+                        <ul class="pagination pagination-sm" id="paginationcss">
+                            <li class="page-item">
+                                <a class="page-link button" aria-label="Previous" ng-click="previouspage()">
+                                    <span aria-hidden="true" class="text-secondary">&laquo;</span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                            </li>
+                            <li class="page-item active">
+                                <a class="page-link" href="#">{{page1}}</a>
+                            </li>
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#">{{page2}}</a>
+                            </li>
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#">{{page3}}</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link button" aria-label="Next" ng-click="nextpage()">
+                                    <span aria-hidden="true" class="text-secondary">&raquo;</span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                </th>
+            </tr>
+        </thead>
+        <!------------------------------------- Table Body ------------------------------------->
+        <tbody>
+            <tr>
+                <td>
+                    <input type="number" class="form-control" ng-model="newolive.DIA">
+                </td>
+                <td>
+                    <input type="number" class="form-control" ng-model="newolive.MES">
+                </td>
+                <td>
+                    <input type="number" class="form-control" ng-model="newolive.ANYO">
+                </td>
+                <td>
+                    <input type="number" class="form-control" ng-model="newolive.KGSACEITUNA">
+                </td>
+                <td>
+                    <input type="number" class="form-control" ng-model="newolive.RDTO">
+                </td>
+                <td>
+                    <input type="number" class="form-control" ng-model="newolive.HUMEDAD">
+                </td>
+                <td>
+                    <input type="number" class="form-control" ng-model="newolive.ACIDEZ">
+                </td>
+                <td>
+                    <input type="number" class="form-control" ng-model="newolive.TICKET">
+                </td>
+                <td colspan=2>
+                    <button class="btn btn-outline-primary btn-block" ng-click="newolivedata()">Create</button>
+                </td>
+            </tr>
+            <tr ng-repeat="data in olivedata">
+                <td class="text-center">{{data.DIA}}</td>
+                <td class="text-center">{{data.MES}}</td>
+                <td class="text-center">{{data.ANYO}}</td>
+                <td class="text-center">{{data.KGSACEITUNA}}</td>
+                <td class="text-center">{{data.RDTO}}</td>
+                <td class="text-center">{{data.HUMEDAD}}</td>
+                <td class="text-center">{{data.ACIDEZ}}</td>
+                <td class="text-center">{{data.TICKET}}</td>
+                <td class="text-center">
+                    <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#deleteOneModal" ng-click="ticketdeleteparams(data.DIA, data.MES, data.ANYO, data.TICKET) ">Delete</button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-outline-warning btn-sm" ng-click="popoverfunction()" data-toggle="popover" data-placement="left" title="Albarán:" data-html="true" container="body" data-content='<form>
+						<div class="form-group">
+						<label class="badge badge-secondary">Día:</label>
+					  <input type="number" class="form-control" id="dayupdate" value={{data.DIA}}>
+					  </div>
+						<div class="form-group">
+						<label class="badge badge-secondary">Mes:</label>
+					  <input type="number" class="form-control" id="monthupdate" value={{data.MES}}>
+					  </div>
+						<div class="form-group">
+					  <label class="badge badge-secondary">Año:</label>
+					  <input type="number" class="form-control" id="yearupdate" value={{data.ANYO}}>
+					  </div>
+						<div class="form-group">
+					  <label class="badge badge-secondary">Kilogramos:</label>
+					  <input type="number" class="form-control" id="kgsupdate" value={{data.KGSACEITUNA}}> 
+					  </div>
+						<div class="form-group">
+					  <label class="badge badge-secondary">Rendimiento (%):</label>
+					  <input type="number" class="form-control" id="rdtoupdate" value={{data.RDTO}}> 
+					  </div>
+						<div class="form-group">
+					  <label class="badge badge-secondary">Humedad (%):</label>
+					  <input type="number" class="form-control" id="humidityupdate" value={{data.HUMEDAD}}>
+					  </div>
+						<div class="form-group">
+					  <label class="badge badge-secondary">Acidez (%):</label>
+					  <input type="number" class="form-control" id="acidityupdate" value={{data.ACIDEZ}}>
+					  </div>
+						<div class="form-group">
+					  <label class="badge badge-secondary">Nº Albarán (%):</label>
+					  <input type="number" class="form-control" id="ticketupdate" value={{data.TICKET}} readonly> 
+					  </div>
+					  <button class="btn btn-outline-primary" id="updateolivedata">Actualizar</button>
+					  <button class="btn btn-outline-danger" id="cancel" >Cancelar</button>
+					</form>'>Edit</button>
+                </td>
+            </tr>
+        </tbody>
+
+        <!------------------------------------- Delete all and Load initial data ------------------------------------->
+
+    </table>
+    <div>
+        <tr>
+            <button class="btn btn-outline-danger btn-block" data-toggle="modal" data-target="#deleteAllModal">Delete All</button>
+
+        </tr>
+        <tr>
+            <button class="btn btn-outline-success btn-block" data-toggle="modal" data-target="#initialDataModal">Load Data</button>
+
+        </tr>
+        <br>
+    </div>
+</div>
+
+<!------------------------------------- Footer ------------------------------------->
+
+<footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; josprimen@alum.us.es</p>
+    </div>
+    <!-- /.container -->
+</footer>

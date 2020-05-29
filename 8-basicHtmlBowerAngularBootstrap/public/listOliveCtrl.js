@@ -12,6 +12,10 @@ angular.module('OliveApp').controller('DataCtrl', [
         $scope.page1 = 1;
 		$scope.page2 = 2;
 		$scope.page3 = 3;
+		var paramdeleteday = "";
+		var paramdeletemonth = "";
+		var paramdeleteyear = "";
+		var paramdeleteticket = "";
 
 
 /*#GE------------------------------GETTERS---------------------------*/
@@ -195,11 +199,16 @@ angular.module('OliveApp').controller('DataCtrl', [
 
 
 /*#GE------------------------------DELETES---------------------------*/
-
-        $scope.deleteticket = function(day, month, year, ticket) {
-            $http.delete(url + '/' + year + '/' + month + '/' + day + '/' + ticket).then(
+		$scope.ticketdeleteparams = function(day, month, year, ticket){
+			paramdeleteday = Number(day);
+			paramdeletemonth = Number(month);
+			paramdeleteyear = Number(year);
+			paramdeleteticket = Number(ticket);
+		};
+        $scope.deleteticket = function() {
+            $http.delete(url + '/' + paramdeleteyear + '/' + paramdeletemonth + '/' + paramdeleteday + '/' + paramdeleteticket).then(
                 function successCallback(req, res) {
-                    console.log('Deleting delivery note with number: ' + ticket);
+                    console.log('Deleting delivery note with number: ' + paramdeleteticket);
 
                     getDataAux();
                     var notify = $.notify(
@@ -207,7 +216,7 @@ angular.module('OliveApp').controller('DataCtrl', [
                             title: '<strong>¡Ok!</strong>',
                             message:
                                 'El albarán número <strong>' +
-                                ticket +
+                                paramdeleteticket +
                                 '</strong> se ha eliminado correctamente.'
                         },
                         {
