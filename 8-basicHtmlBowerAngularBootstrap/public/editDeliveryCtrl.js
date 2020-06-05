@@ -5,25 +5,24 @@ angular.module('OliveApp').controller('EditCtrl', [
     function($scope, $http) {
         console.log('Data controller initialized!!');
 
-        
-	        var url = '/josprimenapi/v1/olive';
-		
-/*#GE------------------------------VARIABLES---------------------------*/
+        var url = '/josprimenapi/v1/olive';
 
-		$scope.offset = 0;
-		$scope.limit = 15;
+        /*#GE------------------------------VARIABLES---------------------------*/
+
+        $scope.offset = 0;
+        $scope.limit = 15;
         $scope.page1 = 1;
-		$scope.page2 = 2;
-		$scope.page3 = 3;
-		var paramdeleteday = "";
-		var paramdeletemonth = "";
-		var paramdeleteyear = "";
-		var paramdeleteticket = "";
-		
-/*#GE------------------------------GETTERS---------------------------*/
-		
+        $scope.page2 = 2;
+        $scope.page3 = 3;
+        var paramdeleteday = '';
+        var paramdeletemonth = '';
+        var paramdeleteyear = '';
+        var paramdeleteticket = '';
+
+        /*#GE------------------------------GETTERS---------------------------*/
+
         function getData() {
-            $http.get(url + "?limit=" + $scope.limit +"&offset=" + $scope.offset).then(
+            $http.get(url + '?limit=' + $scope.limit + '&offset=' + $scope.offset).then(
                 function successCallback(res) {
                     console.log('Getting ' + url);
                     $scope.olivedata = res.data;
@@ -83,13 +82,11 @@ angular.module('OliveApp').controller('EditCtrl', [
                 }
             );
         }
-		
-		
-		getData();
 
+        getData();
 
         function getDataAux() {
-            $http.get(url + "?limit=" + $scope.limit +"&offset=" + $scope.offset).then(
+            $http.get(url + '?limit=' + $scope.limit + '&offset=' + $scope.offset).then(
                 function successCallback(res) {
                     console.log('Getting ' + url);
                     $scope.olivedata = res.data;
@@ -120,8 +117,7 @@ angular.module('OliveApp').controller('EditCtrl', [
             );
         }
 
-
-/*#GE------------------------------POST---------------------------*/
+        /*#GE------------------------------POST---------------------------*/
 
         $scope.newolivedata = function() {
             $http.post(url, $scope.newolive).then(
@@ -199,57 +195,68 @@ angular.module('OliveApp').controller('EditCtrl', [
             );
         };
 
-
-/*#GE------------------------------DELETES---------------------------*/
-		$scope.ticketdeleteparams = function(day, month, year, ticket){
-			paramdeleteday = Number(day);
-			paramdeletemonth = Number(month);
-			paramdeleteyear = Number(year);
-			paramdeleteticket = Number(ticket);
-		};
+        /*#GE------------------------------DELETES---------------------------*/
+        $scope.ticketdeleteparams = function(day, month, year, ticket) {
+            paramdeleteday = Number(day);
+            paramdeletemonth = Number(month);
+            paramdeleteyear = Number(year);
+            paramdeleteticket = Number(ticket);
+        };
         $scope.deleteticket = function() {
-            $http.delete(url + '/' + paramdeleteyear + '/' + paramdeletemonth + '/' + paramdeleteday + '/' + paramdeleteticket).then(
-                function successCallback(req, res) {
-                    console.log('Deleting delivery note with number: ' + paramdeleteticket);
+            $http
+                .delete(
+                    url +
+                        '/' +
+                        paramdeleteyear +
+                        '/' +
+                        paramdeletemonth +
+                        '/' +
+                        paramdeleteday +
+                        '/' +
+                        paramdeleteticket
+                )
+                .then(
+                    function successCallback(req, res) {
+                        console.log('Deleting delivery note with number: ' + paramdeleteticket);
 
-                    getDataAux();
-                    var notify = $.notify(
-                        {
-                            title: '<strong>¡Ok!</strong>',
-                            message:
-                                'El albarán número <strong>' +
-                                paramdeleteticket +
-                                '</strong> se ha eliminado correctamente.'
-                        },
-                        {
-                            type: 'success',
-                            offset: 60,
-                            animate: {
-                                enter: 'animated fadeInRight',
-                                exit: 'animated fadeOutRight'
+                        getDataAux();
+                        var notify = $.notify(
+                            {
+                                title: '<strong>¡Ok!</strong>',
+                                message:
+                                    'El albarán número <strong>' +
+                                    paramdeleteticket +
+                                    '</strong> se ha eliminado correctamente.'
+                            },
+                            {
+                                type: 'success',
+                                offset: 60,
+                                animate: {
+                                    enter: 'animated fadeInRight',
+                                    exit: 'animated fadeOutRight'
+                                }
                             }
-                        }
-                    );
-                    //notify.close();
-                },
-                function errorCallBack(req, res) {
-                    var notify = $.notify(
-                        {
-                            title: '<strong>¡Ups!</strong>',
-                            message: 'Hubo un error al borrar el albarán.'
-                        },
-                        {
-                            type: 'danger',
-                            offset: 60,
-                            animate: {
-                                enter: 'animated fadeInRight',
-                                exit: 'animated fadeOutRight'
+                        );
+                        //notify.close();
+                    },
+                    function errorCallBack(req, res) {
+                        var notify = $.notify(
+                            {
+                                title: '<strong>¡Ups!</strong>',
+                                message: 'Hubo un error al borrar el albarán.'
+                            },
+                            {
+                                type: 'danger',
+                                offset: 60,
+                                animate: {
+                                    enter: 'animated fadeInRight',
+                                    exit: 'animated fadeOutRight'
+                                }
                             }
-                        }
-                    );
-                    //notify.close();
-                }
-            );
+                        );
+                        //notify.close();
+                    }
+                );
         };
 
         $scope.deleteall = function() {
@@ -293,8 +300,7 @@ angular.module('OliveApp').controller('EditCtrl', [
             );
         };
 
-
-/*#GE------------------------------LOAD INITIAL DATA---------------------------*/
+        /*#GE------------------------------LOAD INITIAL DATA---------------------------*/
 
         $scope.initialdata = function(res) {
             $http.get(url + '/loadInitialData').then(
@@ -337,14 +343,12 @@ angular.module('OliveApp').controller('EditCtrl', [
             );
         };
 
-
-/*#GE------------------------------POPOVER FUNCTION AND PUT (JQUERY)---------------------------*/
-		/*--Complex Bootstrap objects needs functionality and it do it with jquery. Bootstrap.ui works with angular js, but not the normal Bootstrap library--*/
-
+        /*#GE------------------------------POPOVER FUNCTION AND PUT (JQUERY)---------------------------*/
+        /*--Complex Bootstrap objects needs functionality and it do it with jquery. Bootstrap.ui works with angular js, but not the normal Bootstrap library--*/
 
         $scope.popoverfunction = function() {
             //Popover function code
-			console.log("ee" + $scope.selected + $scope.from);
+            console.log('ee' + $scope.selected + $scope.from);
             $(function() {
                 $('[data-toggle="popover"]').popover({
                     html: true,
@@ -452,72 +456,151 @@ angular.module('OliveApp').controller('EditCtrl', [
             }
         });
 
+        /*------------------------------PAGINATION---------------------------*/
 
+        $scope.previouspage = function() {
+            if ($scope.page1 > 1) {
+                $scope.page1--;
+                $scope.page2--;
+                $scope.page3--;
+                $scope.offset -= $scope.limit;
+                getDataAux();
+            }
+        };
 
-		/*------------------------------PAGINATION---------------------------*/
+        $scope.nextpage = function() {
+            var objectsnumber = 0;
+            var maxpage = null;
+            $http.get(url).then(function(res) {
+                if (res.data.length != 0) {
+                    objectsnumber = res.data.length;
+                }
+                if (objectsnumber != 0) {
+                    if (objectsnumber % $scope.limit == 0) {
+                        maxpage = parseInt(objectsnumber / $scope.limit);
+                    } else {
+                        maxpage = parseInt(objectsnumber / $scope.limit) + 1;
+                    }
+                }
+                if (!($scope.page1 + 1 > maxpage)) {
+                    $scope.page1++;
+                    $scope.page2++;
+                    $scope.page3++;
+                    $scope.offset += $scope.limit;
+                    getDataAux();
+                } else {
+                    var notify = $.notify(
+                        {
+                            title: '<strong>¡Ups!</strong>',
+                            message: 'Ya no existen más datos.'
+                        },
+                        {
+                            type: 'warning',
+                            offset: 60,
+                            animate: {
+                                enter: 'animated fadeInRight',
+                                exit: 'animated fadeOutRight'
+                            }
+                        }
+                    );
+                }
+            });
+        };
 
-		$scope.previouspage = function(){
-			if($scope.page1>1){
-				$scope.page1--;
-				$scope.page2--;
-				$scope.page3--;
-				$scope.offset -= $scope.limit;
-				getDataAux();
-			}
-		};
-		
-		$scope.nextpage = function() {
-			var objectsnumber = 0;
-			var maxpage = null;
-			$http.get(url).then(function(res) {
-				if (res.data.length != 0) {
-					objectsnumber = res.data.length;
-				}
-				if (objectsnumber != 0) {
-					if (objectsnumber % $scope.limit == 0) {
-						maxpage = parseInt(objectsnumber / $scope.limit);
-					} else {
-						maxpage = parseInt(objectsnumber / $scope.limit) + 1;
-					}
-				}
-				if (!($scope.page1 + 1 > maxpage)) {
-					$scope.page1++;
-					$scope.page2++;
-					$scope.page3++;
-					$scope.offset += $scope.limit;
-					getDataAux();
-				}else{
-					var notify = $.notify(
-						{
-							title: '<strong>¡Ups!</strong>',
-							message: 'Ya no existen más datos.'
-						},
-						{
-							type: 'warning',
-							offset: 60,
-							animate: {
-								enter: 'animated fadeInRight',
-								exit: 'animated fadeOutRight'
-							}
-						}
-					);
-				}
-			});
-		};
-		
-			$scope.showalldata = function(){
-				$scope.limit=0;
-				$scope.offset=0;
-				getData();
-			};
-		
-		
-		/*------------------------------SEARCH---------------------------*/
+        $scope.showalldata = function() {
+            $scope.limit = 0;
+            $scope.offset = 0;
+            var notify = $.notify('<strong>Espere</strong> Cargando datos...', {
+                offset: 60,
+                animate: {
+                    enter: 'animated fadeInRight',
+                    exit: 'animated fadeOutRight'
+                },
+                allow_dismiss: false,
+                showProgressbar: true
+            });
+            getData();
+        };
 
-		$scope.intervalsearch = function(){
-			$http.get(url + "?" + $scope.selected + "=true&from=" + $scope.from + "&to=" + $scope.to).then(
+        /*------------------------------SEARCH---------------------------*/
+
+        $scope.intervalsearch = function() {
+            $http
+                .get(url + '?' + $scope.selected + '=true&from=' + $scope.from + '&to=' + $scope.to)
+                .then(
+                    function successCallback(res) {
+                        console.log(
+                            'Url búsqueda intervalo: ' +
+                                url +
+                                '?' +
+                                $scope.selected +
+                                '=true&from=' +
+                                $scope.from +
+                                '&to=' +
+                                $scope.to
+                        );
+                        $scope.olivedata = res.data;
+                        var notify = $.notify(
+                            {
+                                title: '<strong>¡Ok!</strong>',
+                                message: 'Datos de la búsqueda obtenidos correctamente'
+                            },
+                            {
+                                type: 'success',
+                                offset: 60,
+                                animate: {
+                                    enter: 'animated fadeInRight',
+                                    exit: 'animated fadeOutRight'
+                                }
+                            }
+                        );
+                        //notify.close();
+                    },
+                    function errorCallBack(res) {
+                        switch (res.status) {
+                            case 404:
+                                var notify = $.notify(
+                                    {
+                                        title: '<strong>¡Ups!</strong>',
+                                        message: 'Parecen no existir datos con esas características'
+                                    },
+                                    {
+                                        type: 'danger',
+                                        offset: 60,
+                                        animate: {
+                                            enter: 'animated fadeInRight',
+                                            exit: 'animated fadeOutRight'
+                                        }
+                                    }
+                                );
+                                //notify.close();
+                                $scope.olivedata = '';
+                                break;
+                            default:
+                                var notify = $.notify(
+                                    {
+                                        title: '<strong>¡Ups!</strong>',
+                                        message: 'Algo ha ido mal, inténtalo más tarde.'
+                                    },
+                                    {
+                                        type: 'danger',
+                                        offset: 60,
+                                        animate: {
+                                            enter: 'animated fadeInRight',
+                                            exit: 'animated fadeOutRight'
+                                        }
+                                    }
+                                );
+                            //notify.close();
+                        }
+                    }
+                );
+        };
+
+        $scope.normalsearch = function() {
+            $http.get(url + '/' + $scope.searchurl).then(
                 function successCallback(res) {
-                    console.log("Url búsqueda intervalo: " + url + "?" + $scope.selected + "=true&from=" + $scope.from + "&to=" + $scope.to);
+                    console.log('Url búsqueda: ' + $scope.searchurl);
                     $scope.olivedata = res.data;
                     var notify = $.notify(
                         {
@@ -574,13 +657,12 @@ angular.module('OliveApp').controller('EditCtrl', [
                     }
                 }
             );
-		};
-		
-		
-		$scope.normalsearch = function(){
-			$http.get(url + "/" + $scope.searchurl).then(
+        };
+
+        $scope.navbarsearch = function() {
+            $http.get(url + '/' + $scope.searchurl).then(
                 function successCallback(res) {
-                    console.log("Url búsqueda: " + $scope.searchurl);
+                    console.log('Url búsqueda: ' + $scope.searchurl);
                     $scope.olivedata = res.data;
                     var notify = $.notify(
                         {
@@ -637,28 +719,88 @@ angular.module('OliveApp').controller('EditCtrl', [
                     }
                 }
             );
-		};
-		
-		
-		$scope.navbarsearch = function(){
-			$http.get(url + "/" + $scope.searchurl).then(
+        };
+
+        /*------------------------------Back to TOP and BOTTOM buttons---------------------------*/
+
+        $(document).ready(function() {
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 50) {
+                    $('#back-to-top').fadeIn();
+                } else {
+                    $('#back-to-top').fadeOut();
+                }
+            });
+            // scroll body to 0px on click
+            $('#back-to-top').click(function() {
+                $('body,html').animate(
+                    {
+                        scrollTop: 0
+                    },
+                    400
+                );
+                return false;
+            });
+        });
+
+        $(document).ready(function() {
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 50) {
+                    $('#back-to-bottom').fadeIn();
+                } else {
+                    $('#back-to-bottom').fadeOut();
+                }
+            });
+            // scroll body to 0px on click
+            $('#back-to-bottom').click(function() {
+                $('html, body').animate({ scrollTop: $(document).height() }, 'slow');
+                return false;
+            });
+        });
+
+        /*------------------------------Export data to Excel---------------------------*/
+
+        // JSON to CSV Converter
+        function ConvertToCSV(objArray) {
+            var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+            var str = 'DIA; MES;ANYO;KGSACEITUNA;RDTO;HUMEDAD;ACIDEZ;TICKET\r\n';
+
+            for (var i = 0; i < array.length; i++) {
+                var line = '';
+                for (var index in array[i]) {
+                    if (line != '') line += ';';
+
+                    line += array[i][index];
+                }
+                str += line + '\r\n';
+            }
+
+            return str;
+        }
+
+        $scope.excel = function() {
+            var datatoexport;
+            $http.get(url).then(
                 function successCallback(res) {
-                    console.log("Url búsqueda: " + $scope.searchurl);
-                    $scope.olivedata = res.data;
-                    var notify = $.notify(
-                        {
-                            title: '<strong>¡Ok!</strong>',
-                            message: 'Datos de la búsqueda obtenidos correctamente'
+                    console.log('Getting ' + url);
+                    datatoexport = res.data;
+                    var exceldone ='data:text/csv;charset=utf-8,' + ConvertToCSV(JSON.stringify(datatoexport));
+                    var encodedUri = encodeURI(exceldone);
+                    var link = document.createElement('a');
+                    link.setAttribute('href', encodedUri);
+                    link.setAttribute('download', 'olive_data.csv');
+                    document.body.appendChild(link); // Required for FF
+
+                    link.click();
+                    var notify = $.notify('<strong>Espere</strong> Descargando archivo Excel...', {
+                        offset: 60,
+                        animate: {
+                            enter: 'animated fadeInRight',
+                            exit: 'animated fadeOutRight'
                         },
-                        {
-                            type: 'success',
-                            offset: 60,
-                            animate: {
-                                enter: 'animated fadeInRight',
-                                exit: 'animated fadeOutRight'
-                            }
-                        }
-                    );
+                        allow_dismiss: false,
+                        showProgressbar: true
+                    });
                     //notify.close();
                 },
                 function errorCallBack(res) {
@@ -667,7 +809,7 @@ angular.module('OliveApp').controller('EditCtrl', [
                             var notify = $.notify(
                                 {
                                     title: '<strong>¡Ups!</strong>',
-                                    message: 'Parecen no existir datos con esas características'
+                                    message: 'La tabla está vacía, rellénela e inténtelo de nuevo'
                                 },
                                 {
                                     type: 'danger',
@@ -700,7 +842,6 @@ angular.module('OliveApp').controller('EditCtrl', [
                     }
                 }
             );
-		};
-		
+        };
     }
 ]);
