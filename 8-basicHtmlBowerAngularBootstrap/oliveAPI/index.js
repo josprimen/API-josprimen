@@ -25,7 +25,7 @@ oliveAPI.methods = function(app, BASE_URL, db, InitialDeliveryNotes, alldata) {
         console.log(Date() + ' - GET /olive/loadInitialData');
         db.deleteMany({});
         db.insertMany(InitialDeliveryNotes);
-        db.find({}).toArray((err, olive) => {
+        db.find({}).sort( { TICKET: -1 } ).toArray((err, olive) => {
             if (err) {
                 console.error('Error accesing DataBase');
                 res.sendStatus(500);
@@ -43,7 +43,7 @@ oliveAPI.methods = function(app, BASE_URL, db, InitialDeliveryNotes, alldata) {
         console.log(Date() + ' - GET /olive/loadAllData');
         db.deleteMany({});
         db.insertMany(alldata);
-        db.find({}).toArray((err, olive) => {
+        db.find({}).sort( { TICKET: -1 } ).toArray((err, olive) => {
             if (err) {
                 console.error('Error accesing DataBase');
                 res.sendStatus(500);
@@ -90,6 +90,7 @@ oliveAPI.methods = function(app, BASE_URL, db, InitialDeliveryNotes, alldata) {
                 .find({ RDTO: { $gte: afrom, $lte: ato } })
                 .skip(offset)
                 .limit(limit)
+				.sort( { TICKET: -1 } )
                 .toArray((err, olive) => {
                     if (err) {
                         console.error('Error accesing DataBase');
@@ -111,6 +112,7 @@ oliveAPI.methods = function(app, BASE_URL, db, InitialDeliveryNotes, alldata) {
                 .find({ HUMEDAD: { $gte: afrom, $lte: ato } })
                 .skip(offset)
                 .limit(limit)
+				.sort( { TICKET: -1 } )
                 .toArray((err, olive) => {
                     if (err) {
                         console.error('Error accesing DataBase');
@@ -132,6 +134,7 @@ oliveAPI.methods = function(app, BASE_URL, db, InitialDeliveryNotes, alldata) {
                 .find({ ACIDEZ: { $gte: afrom, $lte: ato } })
                 .skip(offset)
                 .limit(limit)
+				.sort( { TICKET: -1 } )
                 .toArray((err, olive) => {
                     if (err) {
                         console.error('Error accesing DataBase');
@@ -153,6 +156,7 @@ oliveAPI.methods = function(app, BASE_URL, db, InitialDeliveryNotes, alldata) {
                 .find({ KGSACEITUNA: kgs })
                 .skip(offset)
                 .limit(limit)
+				.sort( { TICKET: -1 } )
                 .toArray((err, olive) => {
                     if (err) {
                         console.error('Error accesing DataBase');
@@ -174,6 +178,7 @@ oliveAPI.methods = function(app, BASE_URL, db, InitialDeliveryNotes, alldata) {
                 .find({ ANYO: year, MES: { $gte: afrom, $lte: ato } })
                 .skip(offset)
                 .limit(limit)
+				.sort( { TICKET: -1 } )
                 .toArray((err, olive) => {
                     if (err) {
                         console.error('Error accesing DataBase');
@@ -194,6 +199,7 @@ oliveAPI.methods = function(app, BASE_URL, db, InitialDeliveryNotes, alldata) {
                 .find({})
                 .skip(offset)
                 .limit(limit)
+				.sort( { TICKET: -1 } )
                 .toArray((err, olive) => {
                     if (err) {
                         console.error('Error accesing DataBase');
@@ -217,7 +223,7 @@ oliveAPI.methods = function(app, BASE_URL, db, InitialDeliveryNotes, alldata) {
     app.get(BASE_URL + '/olive/:year', (req, res) => {
         var year = Number(req.params.year);
         console.log(Date() + ' - GET /olive/' + year);
-        db.find({ ANYO: year }).toArray((err, olive) => {
+        db.find({ ANYO: year }).sort( { TICKET: -1 } ).toArray((err, olive) => {
             if (err) {
                 console.error('Error accesing DataBase');
                 res.sendStatus(500);
@@ -241,7 +247,7 @@ oliveAPI.methods = function(app, BASE_URL, db, InitialDeliveryNotes, alldata) {
         var year = Number(req.params.year);
         var date = '/' + year + '/' + month;
         console.log(Date() + ' - GET /olive/' + date);
-        db.find({ MES: month, ANYO: year }).toArray((err, olive) => {
+        db.find({ MES: month, ANYO: year }).sort( { TICKET: -1 } ).toArray((err, olive) => {
             if (err) {
                 console.error('Error accesing DataBase');
                 res.sendStatus(500);
@@ -266,7 +272,7 @@ oliveAPI.methods = function(app, BASE_URL, db, InitialDeliveryNotes, alldata) {
         var year = Number(req.params.year);
         var date = '' + day + '/' + month + '/' + year;
         console.log(Date() + ' - GET /olive/' + date);
-        db.find({ DIA: day, MES: month, ANYO: year }).toArray((err, olive) => {
+        db.find({ DIA: day, MES: month, ANYO: year }).sort( { TICKET: -1 } ).toArray((err, olive) => {
             if (err) {
                 console.error('Error accesing DataBase');
                 res.sendStatus(500);
@@ -292,7 +298,7 @@ oliveAPI.methods = function(app, BASE_URL, db, InitialDeliveryNotes, alldata) {
         var year = Number(req.params.year);
         var date = '' + day + '/' + month + '/' + year;
         console.log(Date() + ' - GET /olive/' + date + '/' + ticket);
-        db.find({ DIA: day, MES: month, ANYO: year, TICKET: ticket }).toArray((err, olive) => {
+        db.find({ DIA: day, MES: month, ANYO: year, TICKET: ticket }).sort( { TICKET: -1 } ).toArray((err, olive) => {
             if (err) {
                 console.error('Error accesing DataBase');
                 res.sendStatus(500);

@@ -1,9 +1,9 @@
-angular.module('OliveApp').controller('EditCtrl', [
+angular.module('OliveApp').controller('OptionsCtrl', [
     '$scope',
     '$http',
 
     function($scope, $http) {
-        console.log('Data controller initialized!!');
+        console.log('Options controller initialized!!');
 
         var url = '/josprimenapi/v1/olive';
 

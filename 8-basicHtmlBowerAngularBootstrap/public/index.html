@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html ng-app="OliveApp">
+<html lang="es" ng-app="OliveApp">
 
 <head>
     <! –– Be careful with the import order of the scripts ––>
-    <title>Josenri's Server</title>
+	<meta name="viewport" content="width=1024">
+
+    <title>Gestor Albaranes</title>
+	<link rel='icon' type='image/png' href='https://cdn.iconscout.com/icon/premium/png-256-thumb/olive-14-565347.png'>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
 	<link rel="stylesheet" href="bower_components/animate.css/animate.min.css" type="text/css" />
 	<link rel="stylesheet" href="bower_components/animate.css/animate.compat.css" type="text/css" />
@@ -11,6 +14,8 @@
 	<link rel="stylesheet" href="bower_components/components-font-awesome/css/fontawesome.min.css" type="text/css"/>
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/product/">
+	<link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/examples/product/product.css">
 
 	
 	<!-- Core JavaScript/jQuery Plugins -->
@@ -25,15 +30,23 @@
 	<!--<script src="https://code.highcharts.com/highcharts.js"></script>-->
     <script src="oliveManagerApp.js"></script>
     <script src="listOliveCtrl.js"></script>
-    <script src="editDeliveryCtrl.js"></script>
+    <script src="advancedOptionsCtrl.js"></script>
+	<script src="infoCtrl.js"></script>
 	
-	<style type="text/css">#paginationcss {margin: 0; padding:0}
+	<style type="text/css">
+		/*body {zoom :80%;}*/
+		#paginationcss {margin: 0; padding:0;}
+		#one{z-index: 0;}
 		a:hover {cursor:pointer;}
 		#close {margin: 0; padding:0}
 		#jumbobuttons {padding-top:10px}
 		#editjumbo {padding:10px}
 		#back-to-top {background-color: #CDCDCD;position: fixed;bottom: 80px;right: 25px;display: none;}
 		#back-to-bottom {background-color: #CDCDCD;position: fixed;bottom: 25px;right: 25px;display: none;}
+		#floatingbutton{position:fixed;width:60px;height:60px;bottom:40px;right:40px;border-radius:50px;text-align:center;
+			border-style: solid;background-color: #ECECEC;}
+		#floatingicon{margin-top:22px;}
+		#floatingcard{text-align: center; border-color: #CDCDCD; margin-bottom: 5rem; width: 11rem;} /*same css propertys than in card class atribute 			because of the show property of the popover*/
 	</style>
 
 </head>

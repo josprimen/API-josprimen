@@ -5,8 +5,12 @@ angular.module('OliveApp', ['ui.bootstrap', 'ngRoute']).config(function($routePr
             templateUrl: 'listOlive.html',
             controller: 'DataCtrl'
         })
-        .when('/edit', {
-            templateUrl: 'editDelivery.html',
-            controller: 'EditCtrl'
+        .when('/options', {
+            templateUrl: 'advancedOptions.html',
+            controller: 'OptionsCtrl'
+        })
+		.when('/info', {
+            templateUrl: 'info.html',
+            controller: 'InfoCtrl'
         });
 });

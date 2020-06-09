@@ -339,7 +339,6 @@ angular.module('OliveApp').controller('DataCtrl', [
 /*#GE------------------------------POPOVER FUNCTION AND PUT (JQUERY)---------------------------*/
 		/*--Complex Bootstrap objects needs functionality and it do it with jquery. Bootstrap.ui works with angular js, but not the normal Bootstrap library--*/
 
-
         $scope.popoverfunction = function() {
             //Popover function code
             $(function() {
@@ -501,6 +500,9 @@ angular.module('OliveApp').controller('DataCtrl', [
 				}
 			});
 		};
+		
+		//$('#floatingbutton').popover('show');
+		//$('#floatingbutton').click();
 
     }
 ]);
