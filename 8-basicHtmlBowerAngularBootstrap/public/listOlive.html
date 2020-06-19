@@ -10,7 +10,7 @@
         <!--ml or mr to left or right navbar-->
         <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="#" id="inicio">
                     <i class="fa fa-home" aria-hidden="true"></i> Inicio
                 </a>
             </li>
@@ -19,7 +19,7 @@
                     <span class="fa fa-github"></span> Github</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#!/info" ng-click="popoverfunction()">
+                <a class="nav-link" href="#!/info" ng-click="popovercardhide()" id="informacion">
                     <i class="fa fa-info-circle" aria-hidden="true"></i>
                     Información</a>
             </li>
@@ -233,8 +233,16 @@
 					  <label class="badge badge-secondary">Nº Albarán (%):</label>
 					  <input type="number" class="form-control" id="ticketupdate" value={{data.TICKET}} readonly> 
 					  </div>
-					  <button class="btn btn-outline-primary" id="updateolivedata">Actualizar</button>
-					  <button class="btn btn-outline-danger" id="cancel" >Cancelar</button>
+					  <div class="container">
+                	<div class="row">
+                    <div class="col-sm-6">
+                        <button class="btn btn-outline-primary btn-block btn-sm text-nowrap" id="updateolivedata">Actualizar</button>
+                    </div>
+                    <div class="col-sm-6">
+                        <button class="btn btn-outline-danger btn-block btn-sm" id="cancel">Cancelar</button>
+                    </div>
+                </div>
+            </div>
 					</form>'>Editar</button>
                 </td>
             </tr>
@@ -245,7 +253,7 @@
             <div class="card-body text-dark">
                 <h5 class="card-title">¿Necesitas acceder a las opciones avanzadas?</h5>
                 <p class="card-text">Desde aquí podrás acceder a las búsquedas avanzadas y otras muchas opciones.</p>
-                <a href="#!/options" class="btn btn-outline-primary" ng-click="options" id="cancel">Ir a opciones</a>
+                <a href="#!/options" class="btn btn-outline-primary" ng-click="popovercardhide" id="cancel">Ir a opciones</a>
             </div>
         </div>'>
             <i class="fa fa-cog text-dark" id="floatingicon"></i>

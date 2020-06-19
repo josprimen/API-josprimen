@@ -14,10 +14,12 @@ angular.module('OliveApp').controller('OptionsCtrl', [
         $scope.page1 = 1;
         $scope.page2 = 2;
         $scope.page3 = 3;
+        $scope.allDataButtonText = 'Mostrar todos los datos';
         var paramdeleteday = '';
         var paramdeletemonth = '';
         var paramdeleteyear = '';
         var paramdeleteticket = '';
+        var paginated = true;
 
         /*#GE------------------------------GETTERS---------------------------*/
 
@@ -346,9 +348,12 @@ angular.module('OliveApp').controller('OptionsCtrl', [
         /*#GE------------------------------POPOVER FUNCTION AND PUT (JQUERY)---------------------------*/
         /*--Complex Bootstrap objects needs functionality and it do it with jquery. Bootstrap.ui works with angular js, but not the normal Bootstrap library--*/
 
+        $('#informacion, #inicio, #graficas').on('click', function(e) {
+            $('[data-toggle=popover]').popover('hide');
+        });
+
         $scope.popoverfunction = function() {
             //Popover function code
-            console.log('ee' + $scope.selected + $scope.from);
             $(function() {
                 $('[data-toggle="popover"]').popover({
                     html: true,
@@ -469,57 +474,90 @@ angular.module('OliveApp').controller('OptionsCtrl', [
         };
 
         $scope.nextpage = function() {
-            var objectsnumber = 0;
-            var maxpage = null;
-            $http.get(url).then(function(res) {
-                if (res.data.length != 0) {
-                    objectsnumber = res.data.length;
-                }
-                if (objectsnumber != 0) {
-                    if (objectsnumber % $scope.limit == 0) {
-                        maxpage = parseInt(objectsnumber / $scope.limit);
-                    } else {
-                        maxpage = parseInt(objectsnumber / $scope.limit) + 1;
+            if (paginated) {
+                var objectsnumber = 0;
+                var maxpage = null;
+                $http.get(url).then(function(res) {
+                    if (res.data.length != 0) {
+                        objectsnumber = res.data.length;
                     }
-                }
-                if (!($scope.page1 + 1 > maxpage)) {
-                    $scope.page1++;
-                    $scope.page2++;
-                    $scope.page3++;
-                    $scope.offset += $scope.limit;
-                    getDataAux();
-                } else {
-                    var notify = $.notify(
-                        {
-                            title: '<strong>¡Ups!</strong>',
-                            message: 'Ya no existen más datos.'
-                        },
-                        {
-                            type: 'warning',
-                            offset: 60,
-                            animate: {
-                                enter: 'animated fadeInRight',
-                                exit: 'animated fadeOutRight'
-                            }
+                    if (objectsnumber != 0) {
+                        if (objectsnumber % $scope.limit == 0) {
+                            maxpage = parseInt(objectsnumber / $scope.limit);
+                        } else {
+                            maxpage = parseInt(objectsnumber / $scope.limit) + 1;
                         }
-                    );
-                }
-            });
+                    }
+                    if (!($scope.page1 + 1 > maxpage)) {
+                        $scope.page1++;
+                        $scope.page2++;
+                        $scope.page3++;
+                        $scope.offset += $scope.limit;
+                        getDataAux();
+                    } else {
+                        var notify = $.notify(
+                            {
+                                title: '<strong>¡Ups!</strong>',
+                                message: 'Ya no existen más datos.'
+                            },
+                            {
+                                type: 'warning',
+                                offset: 60,
+                                animate: {
+                                    enter: 'animated fadeInRight',
+                                    exit: 'animated fadeOutRight'
+                                }
+                            }
+                        );
+                    }
+                });
+            } else {
+                var notify = $.notify(
+                    {
+                        title: '<strong>¡Ups!</strong>',
+                        message: 'Ya no existen más datos.'
+                    },
+                    {
+                        type: 'warning',
+                        offset: 60,
+                        animate: {
+                            enter: 'animated fadeInRight',
+                            exit: 'animated fadeOutRight'
+                        }
+                    }
+                );
+            }
         };
 
         $scope.showalldata = function() {
-            $scope.limit = 0;
-            $scope.offset = 0;
-            var notify = $.notify('<strong>Espere</strong> Cargando datos...', {
-                offset: 60,
-                animate: {
-                    enter: 'animated fadeInRight',
-                    exit: 'animated fadeOutRight'
-                },
-                allow_dismiss: false,
-                showProgressbar: true
-            });
-            getData();
+            if (paginated) {
+                paginated = false;
+                $scope.limit = 0;
+                $scope.offset = 0;
+                $scope.page1 = 1;
+                $scope.page2 = 2;
+                $scope.page3 = 3;
+                var notify = $.notify('<strong>Espere</strong> Cargando datos...', {
+                    offset: 60,
+                    animate: {
+                        enter: 'animated fadeInRight',
+                        exit: 'animated fadeOutRight'
+                    },
+                    allow_dismiss: false,
+                    showProgressbar: true
+                });
+                getData();
+                $scope.allDataButtonText = 'Paginar';
+            } else {
+                paginated = true;
+                $scope.offset = 0;
+                $scope.limit = 15;
+                $scope.page1 = 1;
+                $scope.page2 = 2;
+                $scope.page3 = 3;
+                getData();
+                $scope.allDataButtonText = 'Mostrar todos los datos';
+            }
         };
 
         /*------------------------------SEARCH---------------------------*/
@@ -784,7 +822,8 @@ angular.module('OliveApp').controller('OptionsCtrl', [
                 function successCallback(res) {
                     console.log('Getting ' + url);
                     datatoexport = res.data;
-                    var exceldone ='data:text/csv;charset=utf-8,' + ConvertToCSV(JSON.stringify(datatoexport));
+                    var exceldone =
+                        'data:text/csv;charset=utf-8,' + ConvertToCSV(JSON.stringify(datatoexport));
                     var encodedUri = encodeURI(exceldone);
                     var link = document.createElement('a');
                     link.setAttribute('href', encodedUri);

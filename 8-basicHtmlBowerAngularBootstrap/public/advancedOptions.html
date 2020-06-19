@@ -10,7 +10,7 @@
         <!--ml or mr to left or right navbar-->
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="#" id="inicio">
                     <i class="fa fa-home" aria-hidden="true"></i> Inicio
                 </a>
             </li>
@@ -19,7 +19,7 @@
                     <span class="fa fa-github"></span> Github</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="#!/info" id="informacion">
                     <i class="fa fa-info-circle" aria-hidden="true"></i>
                     Información</a>
             </li>
@@ -149,7 +149,7 @@
 
             <div class="container" id="jumbobuttons">
                 <tr>
-                    <button class="btn btn-outline-secondary btn-block" data-toggle="modal" data-target="#allDataModal">Mostrar todos los datos
+                    <button class="btn btn-outline-secondary btn-block" data-toggle="modal" data-target="#allDataModal">{{allDataButtonText}}
                         <i class="fa fa-file" aria-hidden="true"></i>
                     </button>
 
@@ -258,40 +258,48 @@
                 </td>
                 <td>
                     <button type="button" class="btn btn-outline-warning btn-sm" ng-click="popoverfunction()" data-toggle="popover" data-placement="left" title="Albarán:" data-html="true" container="body" data-content='<form>
-						<div class="form-group">
+					<div class="form-group">
 						<label class="badge badge-secondary">Día:</label>
-					  <input type="number" class="form-control" id="dayupdate" value={{data.DIA}}>
-					  </div>
-						<div class="form-group">
+						<input type="number" class="form-control" id="dayupdate" value={{data.DIA}}>
+					</div>
+					<div class="form-group">
 						<label class="badge badge-secondary">Mes:</label>
-					  <input type="number" class="form-control" id="monthupdate" value={{data.MES}}>
-					  </div>
-						<div class="form-group">
-					  <label class="badge badge-secondary">Año:</label>
-					  <input type="number" class="form-control" id="yearupdate" value={{data.ANYO}}>
-					  </div>
-						<div class="form-group">
-					  <label class="badge badge-secondary">Kilogramos:</label>
-					  <input type="number" class="form-control" id="kgsupdate" value={{data.KGSACEITUNA}}> 
-					  </div>
-						<div class="form-group">
-					  <label class="badge badge-secondary">Rendimiento (%):</label>
-					  <input type="number" class="form-control" id="rdtoupdate" value={{data.RDTO}}> 
-					  </div>
-						<div class="form-group">
-					  <label class="badge badge-secondary">Humedad (%):</label>
-					  <input type="number" class="form-control" id="humidityupdate" value={{data.HUMEDAD}}>
-					  </div>
-						<div class="form-group">
-					  <label class="badge badge-secondary">Acidez (%):</label>
-					  <input type="number" class="form-control" id="acidityupdate" value={{data.ACIDEZ}}>
-					  </div>
-						<div class="form-group">
-					  <label class="badge badge-secondary">Nº Albarán (%):</label>
-					  <input type="number" class="form-control" id="ticketupdate" value={{data.TICKET}} readonly> 
-					  </div>
-					  <button class="btn btn-outline-primary" id="updateolivedata">Actualizar</button>
-					  <button class="btn btn-outline-danger" id="cancel" >Cancelar</button>
+						<input type="number" class="form-control" id="monthupdate" value={{data.MES}}>
+					</div>
+					<div class="form-group">
+						<label class="badge badge-secondary">Año:</label>
+						<input type="number" class="form-control" id="yearupdate" value={{data.ANYO}}>
+					</div>
+					<div class="form-group">
+						<label class="badge badge-secondary">Kilogramos:</label>
+						<input type="number" class="form-control" id="kgsupdate" value={{data.KGSACEITUNA}}>
+					</div>
+					<div class="form-group">
+						<label class="badge badge-secondary">Rendimiento (%):</label>
+						<input type="number" class="form-control" id="rdtoupdate" value={{data.RDTO}}>
+					</div>
+					<div class="form-group">
+						<label class="badge badge-secondary">Humedad (%):</label>
+						<input type="number" class="form-control" id="humidityupdate" value={{data.HUMEDAD}}>
+					</div>
+					<div class="form-group">
+						<label class="badge badge-secondary">Acidez (%):</label>
+						<input type="number" class="form-control" id="acidityupdate" value={{data.ACIDEZ}}>
+					</div>
+					<div class="form-group">
+						<label class="badge badge-secondary">Nº Albarán (%):</label>
+						<input type="number" class="form-control" id="ticketupdate" value={{data.TICKET}} readonly>
+					</div>
+					<div class="container">
+						<div class="row">
+							<div class="col-sm-6">
+								<button class="btn btn-outline-primary btn-block btn-sm text-nowrap" id="updateolivedata">Actualizar</button>
+							</div>
+							<div class="col-sm-6">
+								<button class="btn btn-outline-danger btn-block btn-sm" id="cancel">Cancelar</button>
+							</div>
+						</div>
+					</div>
 					</form>'>Editar</button>
                 </td>
             </tr>

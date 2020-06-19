@@ -12,5 +12,9 @@ angular.module('OliveApp', ['ui.bootstrap', 'ngRoute']).config(function($routePr
 		.when('/info', {
             templateUrl: 'info.html',
             controller: 'InfoCtrl'
+        })
+		.when('/graphs', {
+            templateUrl: 'graph.html',
+            controller: 'GraphCtrl'
         });
 });

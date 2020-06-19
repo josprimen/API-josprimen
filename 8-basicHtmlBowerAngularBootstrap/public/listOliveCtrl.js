@@ -338,6 +338,10 @@ angular.module('OliveApp').controller('DataCtrl', [
 
 /*#GE------------------------------POPOVER FUNCTION AND PUT (JQUERY)---------------------------*/
 		/*--Complex Bootstrap objects needs functionality and it do it with jquery. Bootstrap.ui works with angular js, but not the normal Bootstrap library--*/
+		
+		$('#informacion, #inicio, #graficas').on('click', '.popover .btn', function(e) {
+            $('[data-toggle=popover]').popover('hide');
+        });
 
         $scope.popoverfunction = function() {
             //Popover function code
@@ -350,11 +354,10 @@ angular.module('OliveApp').controller('DataCtrl', [
         };
 
         $(document).on('click', '.popover .btn', function() {
-            //console.log("LA ID: " + this.id);
+            console.log("LA ID: " + this.id);
             if (this.id == 'cancel') {
-                $(this)
-                    .parents('.popover')
-                    .popover('hide');
+                $(this).parents('.popover').popover('hide');
+				$('[data-toggle=popover]').popover('hide');
             }
             if (this.id == 'updateolivedata') {
                 var updatedday = Number($('#dayupdate').val());
@@ -501,6 +504,17 @@ angular.module('OliveApp').controller('DataCtrl', [
 			});
 		};
 		
+		/*------------------------------PAGINATION---------------------------*/
+		 $scope.popovercardshow = function() {
+            $('#floatingbutton').popover('show');
+        };
+
+        $scope.popovercardshow();
+
+        $scope.popovercardhide = function() {
+			$('[data-toggle=popover]').popover('hide');
+            //$('#floatingbutton').popover('hide');
+        };
 		//$('#floatingbutton').popover('show');
 		//$('#floatingbutton').click();
 
