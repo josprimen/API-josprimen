@@ -15,13 +15,18 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link btn-github" href="https://github.com/josprimen/API-josprimen" target="_blank">
-                    <span class="fa fa-github"></span> Github</a>
+                <a class="nav-link" href="#!/graphs" ng-click="popovercardhide()" id="graficas">
+                    <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                    Gráficas</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#!/info" ng-click="popovercardhide()" id="informacion">
                     <i class="fa fa-info-circle" aria-hidden="true"></i>
                     Información</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link btn-github" href="https://github.com/josprimen/API-josprimen" target="_blank">
+                    <span class="fa fa-github"></span> Github</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="https://documenter.getpostman.com/view/3950150/SzYdRw3B?version=latest" target="_blank">
@@ -159,31 +164,31 @@
         <!------------------------------------- Table Body ------------------------------------->
         <tbody>
             <tr>
-                <td>
+                <td id="tds">
                     <input type="number" class="form-control" ng-model="newolive.DIA">
                 </td>
-                <td>
+                <td id="tds">
                     <input type="number" class="form-control" ng-model="newolive.MES">
                 </td>
-                <td>
-                    <input type="number" class="form-control" ng-model="newolive.ANYO">
+                <td id="tds">
+                    <input id="anyo" type="number" class="form-control" ng-model="newolive.ANYO">
                 </td>
-                <td>
+                <td id="tds">
                     <input type="number" class="form-control" ng-model="newolive.KGSACEITUNA">
                 </td>
-                <td>
+                <td id="tds">
                     <input type="number" class="form-control" ng-model="newolive.RDTO">
                 </td>
-                <td>
+                <td id="tds">
                     <input type="number" class="form-control" ng-model="newolive.HUMEDAD">
                 </td>
-                <td>
+                <td id="tds">
                     <input type="number" class="form-control" ng-model="newolive.ACIDEZ">
                 </td>
-                <td>
+                <td id="tds">
                     <input type="number" class="form-control" ng-model="newolive.TICKET">
                 </td>
-                <td colspan=2>
+                <td colspan=2 id="createbutton">
                     <button class="btn btn-outline-primary btn-block" ng-click="newolivedata()">Crear</button>
                 </td>
             </tr>
