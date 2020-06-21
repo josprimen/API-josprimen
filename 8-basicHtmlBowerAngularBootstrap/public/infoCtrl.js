@@ -9,5 +9,11 @@ angular.module('OliveApp').controller('InfoCtrl', [
             $('[data-toggle=popover]').popover('hide');
             //$('#floatingbutton').popover('hide');
         };
+
+        $(document).ready(function() {
+            $('#igoogle').click(function(event) {
+                window.location = 'mailto:joseenriqueprietomenacho@gmail.com';
+            });
+        });
     }
 ]);
