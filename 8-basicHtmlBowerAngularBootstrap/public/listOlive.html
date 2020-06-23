@@ -1,0 +1,290 @@
+<!------------------------------------- Header ------------------------------------->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top">
+    <a class="navbar-brand">¡Bienvenido!</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+        <!--ml or mr to left or right navbar-->
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#" id="inicio" ng-click="popovercardhide()">
+                    <i class="fa fa-home" aria-hidden="true"></i> Inicio
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#!/graphs" ng-click="popovercardhide()" id="graficas">
+                    <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                    Gráficas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#!/info" ng-click="popovercardhide()" id="informacion">
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                    Información</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link btn-github" href="https://github.com/josprimen/API-josprimen" target="_blank">
+                    <span class="fa fa-github"></span> Github</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="https://documenter.getpostman.com/view/3950150/SzYdRw3B?version=latest" target="_blank">
+                    <i class="fa fa-check" aria-hidden="true"></i> Pruebas</a>
+            </li>
+            <li>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!------------------------------------- Confirmation Modals ------------------------------------->
+
+<div class="modal fade" id="deleteOneModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white" id="header">
+                <h5 class="modal-title text-center" id="dangertitle">¡Cuidado!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ¿Seguro que quiere eliminar este albarán? Se eliminará de manera permanente y no podrá recuperarlo.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal" ng-click="deleteticket()">Estoy seguro, eliminar.</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteAllModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white" id="header">
+                <h5 class="modal-title text-center" id="dangertitle">¡Cuidado!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ¿Seguro que quiere eliminar todos los datos? Se eliminarán de manera permanente y no podrá recuperarlos.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal" ng-click="deleteall()">Estoy seguro, eliminar.</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="initialDataModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white" id="header">
+                <h5 class="modal-title text-center" id="dangertitle">¡Cuidado!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Si carga los datos predeterminados se borrarán todos los datos existentes actualmente. Está función solo existe para comprobar el funcionamiento de la web.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal" ng-click="initialdata()">Estoy seguro, carga los datos predeterminados.</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!------------------------------------- Page Content ------------------------------------->
+
+<!------------------------------------- Jumbotron ------------------------------------->
+<div class="container">
+    <header class="jumbotron my-4">
+        <h1 class="display-3">Gestor de Albaranes</h1>
+        <p class="lead">Creación de una API e interfaz para la gestión de albaranes en cooperativa.</p>
+    </header>
+</div>
+
+<!------------------------------------- Table ------------------------------------->
+
+<div class="container">
+    <table class="table table-hover">
+        <!------------------------------------- Table Head------------------------------------->
+        <thead class="thead-dark">
+            <tr>
+                <th class="text-center">DÍA</th>
+                <th class="text-center">MES</th>
+                <th class="text-center">AÑO</th>
+                <th class="text-center">KILOS</th>
+                <th class="text-center text-nowrap">RENDIMIENTO (%)</th>
+                <th class="text-center text-nowrap">HUMEDAD (%)</th>
+                <th class="text-center text-nowrap">ACIDEZ (%)</th>
+                <th class="text-center text-nowrap">Nº ALBARÁN</th>
+                <!------------------------------------- Pagination ------------------------------------->
+                <th colspan=2>
+                    <nav>
+                        <ul class="pagination pagination-sm" id="paginationcss">
+                            <li class="page-item">
+                                <a class="page-link button" aria-label="Previous" ng-click="previouspage()">
+                                    <span aria-hidden="true" class="text-secondary">&laquo;</span>
+                                    <span class="sr-only">Anterior</span>
+                                </a>
+                            </li>
+                            <li class="page-item active" id="one">
+                                <a class="page-link" href="#">{{page1}}</a>
+                            </li>
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#">{{page2}}</a>
+                            </li>
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#">{{page3}}</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link button" aria-label="Next" ng-click="nextpage()">
+                                    <span aria-hidden="true" class="text-secondary">&raquo;</span>
+                                    <span class="sr-only">Siguiente</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                </th>
+            </tr>
+        </thead>
+        <!------------------------------------- Table Body ------------------------------------->
+        <tbody>
+            <tr>
+                <td id="tds">
+                    <input id="input_tds"type="number" class="form-control" ng-model="newolive.DIA">
+                </td>
+                <td id="tds">
+                    <input id="input_tds" type="number" class="form-control" ng-model="newolive.MES">
+                </td>
+                <td id="tds">
+                    <input id="input_tds" id="anyo" type="number" class="form-control" ng-model="newolive.ANYO">
+                </td>
+                <td id="tds">
+                    <input id="input_tds" type="number" class="form-control" ng-model="newolive.KGSACEITUNA">
+                </td>
+                <td id="tds">
+                    <input id="input_tds" type="number" class="form-control" ng-model="newolive.RDTO">
+                </td>
+                <td id="tds">
+                    <input id="input_tds" type="number" class="form-control" ng-model="newolive.HUMEDAD">
+                </td>
+                <td id="tds">
+                    <input id="input_tds" type="number" class="form-control" ng-model="newolive.ACIDEZ">
+                </td>
+                <td id="tds">
+                    <input id="input_tds" type="number" class="form-control" ng-model="newolive.TICKET">
+                </td>
+                <td colspan=2 id="createbutton">
+                    <button class="btn btn-outline-primary btn-block" ng-click="newolivedata()">Crear</button>
+                </td>
+            </tr>
+            <tr ng-repeat="data in olivedata">
+                <td class="text-center">{{data.DIA}}</td>
+                <td class="text-center">{{data.MES}}</td>
+                <td class="text-center">{{data.ANYO}}</td>
+                <td class="text-center">{{data.KGSACEITUNA}}</td>
+                <td class="text-center">{{data.RDTO}}</td>
+                <td class="text-center">{{data.HUMEDAD}}</td>
+                <td class="text-center">{{data.ACIDEZ}}</td>
+                <td class="text-center">{{data.TICKET}}</td>
+                <td class="text-center">
+                    <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#deleteOneModal" ng-click="ticketdeleteparams(data.DIA, data.MES, data.ANYO, data.TICKET) ">Borrar</button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-outline-warning btn-sm" ng-click="popoverfunction()" data-toggle="popover" data-trigger="click" data-placement="left" title="Albarán:" data-html="true" container="body" data-content='<form>
+						<div class="form-group">
+						<label class="badge badge-secondary">Día:</label>
+					  <input type="number" class="form-control" id="dayupdate" value={{data.DIA}}>
+					  </div>
+						<div class="form-group">
+						<label class="badge badge-secondary">Mes:</label>
+					  <input type="number" class="form-control" id="monthupdate" value={{data.MES}}>
+					  </div>
+						<div class="form-group">
+					  <label class="badge badge-secondary">Año:</label>
+					  <input type="number" class="form-control" id="yearupdate" value={{data.ANYO}}>
+					  </div>
+						<div class="form-group">
+					  <label class="badge badge-secondary">Kilogramos:</label>
+					  <input type="number" class="form-control" id="kgsupdate" value={{data.KGSACEITUNA}}> 
+					  </div>
+						<div class="form-group">
+					  <label class="badge badge-secondary">Rendimiento (%):</label>
+					  <input type="number" class="form-control" id="rdtoupdate" value={{data.RDTO}}> 
+					  </div>
+						<div class="form-group">
+					  <label class="badge badge-secondary">Humedad (%):</label>
+					  <input type="number" class="form-control" id="humidityupdate" value={{data.HUMEDAD}}>
+					  </div>
+						<div class="form-group">
+					  <label class="badge badge-secondary">Acidez (%):</label>
+					  <input type="number" class="form-control" id="acidityupdate" value={{data.ACIDEZ}}>
+					  </div>
+						<div class="form-group">
+					  <label class="badge badge-secondary">Nº Albarán (%):</label>
+					  <input type="number" class="form-control" id="ticketupdate" value={{data.TICKET}} readonly> 
+					  </div>
+					  <div class="container">
+                	<div class="row">
+                    <div class="col-sm-6">
+                        <button class="btn btn-outline-primary btn-block btn-sm text-nowrap" id="updateolivedata">Actualizar</button>
+                    </div>
+                    <div class="col-sm-6">
+                        <button class="btn btn-outline-danger btn-block btn-sm" id="cancel">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+					</form>'>Editar</button>
+                </td>
+            </tr>
+        </tbody>
+
+        <!------------------------------------- Floating Search Section Card ------------------------------------->
+        <a id="floatingbutton" data-placement="top" data-html="true" data-toggle="popover" container="body" ng-click="popoverfunction()" data-content='<div class="card text-center border-dark mb-2" style="width: 11rem;" id="floatingcard">
+            <div class="card-body text-dark">
+                <h5 class="card-title">¿Necesitas acceder a las opciones avanzadas?</h5>
+                <p class="card-text">Desde aquí podrás acceder a las búsquedas avanzadas y otras muchas opciones.</p>
+                <a href="#!/options" class="btn btn-outline-primary" ng-click="popovercardhide" id="cancel">Ir a opciones</a>
+            </div>
+        </div>'>
+            <i class="fa fa-cog text-dark" id="floatingicon"></i>
+        </a>
+
+        <!------------------------------------- Delete all and Load initial data ------------------------------------->
+
+    </table>
+    <div>
+        <tr>
+            <button class="btn btn-outline-danger btn-block" data-toggle="modal" data-target="#deleteAllModal">Borrar Todo</button>
+
+        </tr>
+        <tr>
+            <button class="btn btn-outline-success btn-block" data-toggle="modal" data-target="#initialDataModal">Cargar Datos Predeterminados</button>
+
+        </tr>
+        <br>
+    </div>
+</div>
+
+<!------------------------------------- Footer ------------------------------------->
+
+<footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; josprimen@alum.us.es</p>
+    </div>
+    <!-- /.container -->
+</footer>
